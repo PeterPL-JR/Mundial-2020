@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/basic-styles.css">
 </head>
 <body>
+<?php ?>
 <img src="images/background.png" id="background">
 <div id="container">
     <img src="images/logo.png" id="logo">
