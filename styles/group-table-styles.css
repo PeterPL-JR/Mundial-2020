@@ -1,0 +1,73 @@
+:root {
+    --border-color: #8a8a8a;
+    --font-color: #525252;
+}
+
+/* Table of Group Teams */
+#group-table {
+    box-shadow: 
+    18px 18px 20px #808080,
+    -13px -13px 20px #808080;
+    
+    border-radius: 20px;
+    border-collapse: collapse;
+
+    margin-left: auto;
+    overflow: hidden;
+}
+#group-table td, #group-table tr {
+    border-collapse: collapse;
+}
+
+#group-table td {
+    height: 70px;
+    border-bottom: solid var(--border-color) 4px;
+}
+
+#group-table tr:nth-child(5) td, 
+#group-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Colors of Teams */
+.dark {
+    background: linear-gradient(to right bottom, #c0c0c0, #8d8d8d);
+}
+.light {
+    background: linear-gradient(to right bottom, #e1e1e1, #b7b7b7);
+}
+
+/* Flag Element */
+.flag-elem {
+    text-align: center;
+    padding-left: 30px;
+}
+.flag-elem img {
+    height: 40px;
+    box-shadow: 3px 3px 10px #4e4e4e;
+    border-radius: 6px;
+}
+
+/* Team Name Element */
+.name-elem {
+    width: 240px;
+    text-align: left;
+    padding-left: 20px;
+    font: bold 22px 'Verdana';
+    color: var(--font-color);
+}
+
+.points-elem {
+    width: 52px;
+    font: bold 28px 'Verdana';
+    color: var(--font-color);
+
+    border-left: solid var(--border-color) 4px;
+    border-right: solid var(--border-color) 4px;
+}
+
+.goals-elem {
+    width: 90px;
+    font: bold 20px 'Verdana';
+    color: var(--font-color);
+}

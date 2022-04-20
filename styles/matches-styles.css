@@ -1,0 +1,152 @@
+/* Div of All Matches */
+#play-off-matches-div {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#group-div {
+    width: 60%;
+    height: 250px;
+    float: left;
+}
+
+#matches-div {
+    width: 40%;
+    height: 250px;
+    float: left;
+}
+
+/* Play-Off Match Div */
+.play-off-match, 
+.knock-match {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 30px;
+    
+    background: linear-gradient(to right bottom, #aeaeae, #595959);
+    box-shadow: 5px 5px 25px black;
+    border-radius: 30px;
+}
+
+/* Team Name & Flag Div */
+.team-div {
+    width: 37%;
+    float: left;
+}
+/* Center Content Div */
+.center-div {
+    width: 26%;
+    height: 100%;
+    float: left;
+}
+
+/* Flag Image */
+.flag {
+    border-radius: 10px;
+    height: 48px;
+    margin-top: 15px;
+    box-shadow: 3px 3px 10px #4e4e4e;
+}
+
+.flag[src="images/flag.png"] {
+    border-radius: 0px;
+}
+
+/* Name of Team */
+.team-name {
+    font: bold 22px 'Verdana';
+    height: 80px;
+    line-height: 80px;
+    color: #333333;
+}
+
+/* Center Hyphen */
+.text-div {
+    width: 26%;
+    height: 100%;
+    text-align: center;
+
+    font: normal 60px 'Verdana';
+    color: #363636;
+    float: left;
+}
+
+/* Score Input Div */
+.input-div {
+    width: 37%;
+    height: 100%;
+    padding-top: 13px;
+    float: left;
+}
+
+/* Score Input */
+.input-div input {
+    width: 30px;
+    height: 40px;
+    font: bold 26px 'Verdana';
+    border-radius: 8px;
+
+    outline: none;
+    border: solid #6d6d6d 4px;
+    text-align: center;
+    color: #464646;
+    background-color: #fdfdfd;
+}
+
+.input-div input:disabled {
+    background-color: #c6c6c6;
+}
+.input-div input:focus {
+    border: solid #444444 4px;
+}
+.input-div input::-webkit-inner-spin-button,
+.input-div input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+/* Main Team Div1 */
+.team-1 {
+    height: 100%;
+    line-height: 80px;
+}
+.team-1 * {
+    float: left;
+}
+.team-1 .flag {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+/* Main Team Div2 */
+.team-2 {
+    height: 100%;
+    line-height: 80px;
+}
+.team-2 * {
+    float: right;
+}
+.team-2 .flag {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+/* Match Commit Button */
+.button {
+    position: static;
+    width: 300px;
+    height: 56px;
+    
+    margin-top: 76px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 27px;
+}
+
+#play-button {
+    margin-top: 90px;
+    font-size: 32px;
+    
+    width: 330px;
+    height: 65px;
+}
