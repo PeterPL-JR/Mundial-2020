@@ -1,11 +1,20 @@
 let knockMatches = [];
+let allKnockMatches = [];
 
+const Winner1 = 0;
+const Winner2 = 1;
+const Draw = 2;
+
+let WINNER = null;
 let knockInput1;
 let knockInput2;
 
 let currentKnockRoundIndex = 0;
 let currentKnockMatchIndex = 0;
 let currentMatchesCount = 8;
+
+let currentMode = "match";
+let roundEnd = false;
 
 let finalists = [];
 let winners = [];
@@ -19,26 +28,32 @@ let names = [
     "Finał"
 ];
 
-// for(var i = 0; i < 8; i++) {
-//     for(var j = 0; j < 6; j++) {
-//         playGroupMatch();
-//     }
-//     loadNextGroup();
-// }
+//DELETE
+prepareGroupRound();
+for(var i = 0; i < 8; i++) {
+    for(var j = 0; j < 6; j++) {
+        playGroupMatch();
+    }
+    loadNextGroup();
+}
+
+var counter = 0;
+while(counter < 16) {
+    
+    if(playKnockMatch() == 2) {
+        playKnockMatch();
+    }
+    counter++;
+} 
+// endGame();
+//DELETE
 
 function prepareKnockRound() {
 
-    getElem("group-div").remove();
-    getElem("matches-div").remove();
+    getId("group-div").remove();
+    getId("matches-div").remove();
 
     groupPlayButton.innerHTML = "Rozegraj Mecz";
-
-    // for(var key in knockQualified) {
-    //     console.log("Grupa " + key);
-    //     for(var team in knockQualified[key]) {
-    //         console.log((team + 1) + " - " + knockQualified[key][team].fullName);
-    //     }
-    // }
 
     knockMatches = [
         new Match(knockQualified['A'][0], knockQualified['B'][1]),
@@ -54,11 +69,9 @@ function prepareKnockRound() {
         new Match(knockQualified['H'][0], knockQualified['G'][1])
     ];
 
-    // for(var match of knockMatches) {
-    //     console.log(match);
-    // }
-
-    groupPlayButton.onclick = playKnockMatch;
+    groupPlayButton.onclick = function() {
+        playKnockMatch("match");
+    }
 
     createKnockMatch(knockMatches[0], 0);
     createKnockMatch(knockMatches[1], 1);
@@ -67,8 +80,6 @@ function prepareKnockRound() {
 
 function createKnockMatch(knockMatchObj, pageIndex) {
     roundNameDiv.innerHTML = names[currentKnockRoundIndex];
-
-    console.log(knockMatches);
 
     var team1 = teams[knockMatchObj.team1];
     var team2 = teams[knockMatchObj.team2];
@@ -87,6 +98,14 @@ function createKnockMatch(knockMatchObj, pageIndex) {
     knockMatch.style.marginLeft = "auto";
     knockMatch.style.marginRight = "auto";
 
+    var random1 = getRandom(0, 3);
+    var random2 = getRandom(0, 3);
+
+    //DELETE
+    // random1 = "";
+    // random2 = "";
+    //DELETE
+
     knockMatch.innerHTML = 
         `<div class="team-1 team-div">
             <img src="${link1}" class="flag">
@@ -95,11 +114,11 @@ function createKnockMatch(knockMatchObj, pageIndex) {
 
         <div class="center-div">
             <div class="input-div" style="text-align: right;">
-                <input type="number" disabled>
+                <input type="number" disabled value="${random1}">
             </div>
             <div class="text-div">-</div>
             <div class="input-div" style="text-align: left;">
-                <input type="number" disabled>
+                <input type="number" disabled value="${random2}">
             </div>
         </div>
 
@@ -115,7 +134,7 @@ function createKnockMatch(knockMatchObj, pageIndex) {
 function setKnockMatchActive(matchIndex, active) {
 
     var pageMatchIndex = (matchIndex % 2);
-    var matchDiv = getElem("knock-match-" + pageMatchIndex);
+    var matchDiv = getId("knock-match-" + pageMatchIndex);
 
     knockInput1 = matchDiv.querySelectorAll("input")[0];
     knockInput2 = matchDiv.querySelectorAll("input")[1];
@@ -148,34 +167,63 @@ function setKnockMatchActive(matchIndex, active) {
 function playKnockMatch() {
     var score1 = parseInt(knockInput1.value);
     var score2 = parseInt(knockInput2.value);
+    
+    var bufferWinners = [];
+    var scoreTotal = -1;
 
-    if(score1 == score2) return;
+    if(isNaN(score1) || isNaN(score2)) return scoreTotal;
+
+    if(score1 == score2) {
+        scoreTotal = Draw;
+
+        if(currentMode == "match") {
+            knockMatches[currentKnockMatchIndex].playMatch(score1, score2);
+            currentMode = "penalty";
+            createPenalty();
+        }
+        return scoreTotal;
+    }
+    
+    if(currentMode == "penalty") {
+        groupPlayButton.innerHTML = "Rozegraj Mecz";
+        knockMatches[currentKnockMatchIndex].playPenalty(score1, score2);
+        currentMode = "match";
+        
+    } else if(currentMode == "match") {
+        knockMatches[currentKnockMatchIndex].playMatch(score1, score2);
+    }
 
     if(currentKnockRoundIndex == 2) {
         var knockOut = knockMatches[currentKnockMatchIndex];
 
         if(score1 > score2) {
+            scoreTotal = Winner1;
+            
             finalists.push(knockOut.team1);
             losers.push(knockOut.team2);
         } else if(score1 < score2) {
+            scoreTotal = Winner2;
+            
             finalists.push(knockOut.team2);
             losers.push(knockOut.team1);
         }
     } else {
         if(score1 > score2) {
+            scoreTotal = Winner1;
             winners.push(knockMatches[currentKnockMatchIndex].team1);
+
         } else if(score1 < score2) {
+            scoreTotal = Winner2;
             winners.push(knockMatches[currentKnockMatchIndex].team2);
         }
     }
-
-    console.log(winners);
 
     setKnockMatchActive(currentKnockMatchIndex, false);
 
     currentKnockMatchIndex++;
     if(currentKnockMatchIndex >= currentMatchesCount) {
         
+        allKnockMatches[currentKnockRoundIndex] = knockMatches;
         knockMatches = [];
 
         if(currentKnockRoundIndex == 2) {
@@ -190,6 +238,8 @@ function playKnockMatch() {
                 var teamObj2 = teams[winners[i * 2 + 1]];
                 knockMatches.push(new Match(teamObj1, teamObj2));
             }
+
+            bufferWinners = winners;
             winners = [];
         }
 
@@ -202,8 +252,8 @@ function playKnockMatch() {
     }
 
     if(currentKnockMatchIndex % 2 == 0) {
-        var div1 = getElem("knock-match-0");
-        var div2 = getElem("knock-match-1");
+        var div1 = getId("knock-match-0");
+        var div2 = getId("knock-match-1");
 
         div1.remove();
         if(currentKnockRoundIndex <= 3) {
@@ -211,14 +261,15 @@ function playKnockMatch() {
         }
 
         if(currentKnockRoundIndex >= names.length) {
+            WINNER = bufferWinners[1];
             endGame();
-            return;
+            return scoreTotal;
         }
 
         if(currentMatchesCount == 1) {
             createKnockMatch(knockMatches[currentKnockMatchIndex], 0);
             setKnockMatchActive(currentKnockMatchIndex, true);
-            return;
+            return scoreTotal;
         }
 
         createKnockMatch(knockMatches[currentKnockMatchIndex], 0);
@@ -226,8 +277,63 @@ function playKnockMatch() {
 
     }
     setKnockMatchActive(currentKnockMatchIndex, true);
+    return scoreTotal;
 }
 
+function createPenalty() {
+    var matchDiv = document.querySelector("#knock-match-" + (currentKnockMatchIndex % 2) + " .center-div");
+    matchDiv.classList.add("penalty-div");
+
+    var random1 = getRandom(0, 5);
+    var random2 = getRandom(0, 5);
+    
+    if(random1 == random2) {
+        var randomYm = getRandom(0, 1);
+        if(randomYm == 0) random1++;
+        else if(randomYm == 1) random2++;    
+    }
+
+    knockInput1.value = random1;
+    knockInput2.value = random2;
+
+    // knockInput1.value = "";
+    // knockInput2.value = "";
+
+    knockInput1.focus();
+    groupPlayButton.innerHTML = "Rozegraj Karne";
+}
+
+//DELETE
+// endGame();
+//DELETE
+
 function endGame() {
+    roundEnd = true;
     groupPlayButton.remove();
+
+    getClass("name-div")[0].innerHTML = "Zwycięzca";
+    getId("content").style.height = "410px";
+
+    var flagImage = document.createElement("img");
+    flagImage.src = "flags/" + teams[WINNER].link;
+    flagImage.id = "winner-flag";
+    
+    var nameDiv = document.createElement("div");
+    nameDiv.id = "winner-name";
+    nameDiv.innerHTML = teams[WINNER].fullName;
+    
+    contentDiv.appendChild(flagImage);
+    contentDiv.appendChild(nameDiv);
+
+    var button = document.createElement("button");
+    button.className = "button";
+    button.id = "share-button";
+    button.innerHTML = "Udostępnij";
+
+    button.style.width = "330px";
+    button.style.fontSize = "30px";
+    button.style.marginTop = "45px";
+    contentDiv.appendChild(button);
+
+    createObject(groups, allKnockMatches);
 }

@@ -31,12 +31,12 @@
 
 /* Team Name & Flag Div */
 .team-div {
-    width: 37%;
+    width: 40%;
     float: left;
 }
 /* Center Content Div */
 .center-div {
-    width: 26%;
+    width: 20%;
     height: 100%;
     float: left;
 }
@@ -63,7 +63,7 @@
 
 /* Center Hyphen */
 .text-div {
-    width: 26%;
+    width: 32%;
     height: 100%;
     text-align: center;
 
@@ -74,7 +74,7 @@
 
 /* Score Input Div */
 .input-div {
-    width: 37%;
+    width: 34%;
     height: 100%;
     padding-top: 13px;
     float: left;
@@ -149,4 +149,10 @@
     
     width: 330px;
     height: 65px;
+}
+
+.penalty-div {
+    background: linear-gradient(to right bottom, #cecece, #7b7b7b);
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px #2e2e2e, -10px -10px 20px #2e2e2e;
 }

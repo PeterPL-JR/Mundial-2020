@@ -1,5 +1,5 @@
-const containerDiv = getElem("play-off-matches-div");
-const playButton = getElem("play-button");
+const containerDiv = getId("play-off-matches-div");
+const playButton = getId("play-button");
 
 var previousScore1;
 var previousScore2;
@@ -18,6 +18,17 @@ createMatchDiv('wal', 'NULL', 0, 1);
 
 setMatchActive(0, 0, true);
 
+//DELETE
+playMatch(0, 0);
+playMatch(1, 1);
+
+playMatch(0, 1);
+playMatch(1, 2);
+
+playMatch(0, 3);
+playMatch(1, 4);
+//DELETE
+
 function createMatchDiv(team1, team2, playOffIndex, matchIndex) {
     currentIndex = playOffIndex;
 
@@ -31,6 +42,14 @@ function createMatchDiv(team1, team2, playOffIndex, matchIndex) {
     var link1 = (team1 == "NULL" ? "images/flag.png" : "flags/" + playOffTeams[team1].link);
     var link2 = (team2 == "NULL" ? "images/flag.png" : "flags/" + playOffTeams[team2].link);
 
+    var random1 = getRandom(0, 3);
+    var random2 = getRandom(0, 3);
+
+    //DELETE
+    // random1 = "";
+    // random2 = "";
+    //DETELE
+
     match.innerHTML =
         `<div class="team-1 team-div">
         <img src="${link1}" class="flag">
@@ -39,11 +58,11 @@ function createMatchDiv(team1, team2, playOffIndex, matchIndex) {
 
         <div class="center-div">
             <div class="input-div" style="text-align: right;">
-                <input type="number" >
+                <input type="number" value='${random1}'>
             </div>
             <div class="text-div">-</div>
             <div class="input-div" style="text-align: left;">
-                <input type="number" >
+                <input type="number" value='${random2}'>
             </div>
         </div>
 
@@ -62,7 +81,7 @@ function createMatchDiv(team1, team2, playOffIndex, matchIndex) {
 }
 
 function setMatchActive(matchIndex, playOffIndex, active) {
-    var matchDiv = getElem("play-off-" + matchIndex);
+    var matchDiv = getId("play-off-" + matchIndex);
     var input1 = document.querySelectorAll("#play-off-" + matchIndex + " input")[0];
     var input2 = document.querySelectorAll("#play-off-" + matchIndex + " input")[1];
 
@@ -173,12 +192,4 @@ function scorePlayOff(score1, score2, playOffIndex) {
 
 function getScore(matchIndex, scoreIndex) {
     return parseInt(document.querySelectorAll("#play-off-" + matchIndex + " input")[scoreIndex].value);
-}
-
-function getElem(id) {
-    return document.getElementById(id);
-}
-
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

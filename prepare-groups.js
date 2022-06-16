@@ -1,4 +1,4 @@
-let contentDiv = getElem("content");
+let contentDiv = getId("content");
 let roundNameDiv = document.querySelector(".round-name .name-div");
 let groupPlayButton;
 
@@ -11,15 +11,15 @@ var currentGroupIndex = 0;
 var currentMatchIndex = 0;
 
 function prepareGroupRound() {
-    // // DELETE THIS
-    // qualified = ['sco', 'per', 'cri'];
-    // //
+    //DELETE
+    qualified = ['wal', 'per', 'cri'];
+    //DELETE
 
     for(var team of qualified) {
         teams[team] = playOffTeams[team];
     }
 
-    getElem("play-button").remove();
+    getId("play-button").remove();
     containerDiv.remove();
 
     for(var i = 0; i < 8; i++) {
@@ -94,8 +94,8 @@ function createGroupPage(groupChar) {
     let groupTeams = group.teams;
     let matches = group.matches;
 
-    var groupDiv = getElem("group-div");
-    var matchesDiv = getElem("matches-div");
+    var groupDiv = getId("group-div");
+    var matchesDiv = getId("matches-div");
 
     var groupTableText = "";
     for(var i = 0; i < 4; i++) {
@@ -121,8 +121,10 @@ function createGroupPage(groupChar) {
         var random1 = getRandom(0, 3);
         var random2 = getRandom(0, 3);
 
-        random1 = "";
-        random2 = "";
+        //DELETE
+        // random1 = "";
+        // random2 = "";
+        //DELETE
 
         matchesTableText +=
         `<div class="group-match ${color}">

@@ -8,11 +8,19 @@ class Match {
     
         this.score1 = -1;
         this.score2 = -1;
+
+        this.penalty1 = -1;
+        this.penalty2 = -1;
     }
 
     playMatch(score1, score2) {
         this.score1 = score1;
         this.score2 = score2;
+    }
+
+    playPenalty(penalty1, penalty2) {
+        this.penalty1 = penalty1;
+        this.penalty2 = penalty2;
     }
 }
 
@@ -48,8 +56,6 @@ function scoreMatchTeam(score1, score2, team1, team2) {
         team2.stats.draws += 1;
     }
 }
-
-// prepareGroupRound();
 
 function playGroupMatch() {
     var score1 = parseInt(inputs[currentMatchIndex][0].value);
@@ -223,7 +229,7 @@ function checkGoalsScored(teamsArray) {
 
 function createTable(group) {
 
-    var table = getElem("group-table");
+    var table = getId("group-table");
     var records = table.querySelectorAll("tr");
     var teams = group.teams;
 
@@ -240,24 +246,6 @@ function createTable(group) {
         pointsElem.innerHTML = teams[i].stats.points;
         goalsElem.innerHTML = teams[i].stats.goalsScored + "-" + teams[i].stats.goalsLost;
     }
-
-    // var groupTableText = "";
-    // for(var i = 0; i < 4; i++) {
-    //     var color = (i < 2) ? "dark" : "light";
-
-    //     groupTableText += 
-    //     `<tr class="${color}">
-    //         <td class="flag-elem">
-    //             <img src='flags/${teams[i].link}'>
-    //         </td>
-    //         <td class="name-elem">${teams[i].fullName}</td>
-    //         <td class="points-elem">${teams[i].stats.points}</td>
-    //         <td class="goals-elem">
-    //             ${teams[i].stats.goalsScored}-${teams[i].stats.goalsLost}
-    //         </td>
-    //     </tr>`;
-    // }
-    // table.innerHTML = groupTableText;
 }
 
 function toChar(groupIndex) {

@@ -1,0 +1,13 @@
+img#winner-flag {
+    width: 100px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px #6b6b6b;
+    margin-top: -26px;
+}
+
+div#winner-name {
+    font: bold 35px 'Tahoma';
+    margin: 12px;
+    color: #3f3f3f;
+    text-shadow: 2px 2px 5px #838383;
+}

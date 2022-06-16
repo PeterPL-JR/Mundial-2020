@@ -18,6 +18,11 @@ body {
     --button-second-color: #af4464;
 }
 
+a:link, a:visited {
+    color: white;
+    text-decoration: none;
+}
+
 img#background {
     position: absolute;
     width: 100%;
