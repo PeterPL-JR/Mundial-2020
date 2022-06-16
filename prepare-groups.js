@@ -10,18 +10,33 @@ let groupDivs = [];
 var currentGroupIndex = 0;
 var currentMatchIndex = 0;
 
-function prepareGroupRound() {
-    //DELETE
-    qualified = ['wal', 'per', 'cri'];
-    //DELETE
+class Match {
+    constructor(teamObj1, teamObj2) {
+        var teamName1 = teamObj1.name;
+        var teamName2 = teamObj2.name;
 
-    for(var team of qualified) {
-        teams[team] = playOffTeams[team];
+        this.team1 = teamName1;
+        this.team2 = teamName2;
+    
+        this.score1 = -1;
+        this.score2 = -1;
+
+        this.penalty1 = -1;
+        this.penalty2 = -1;
     }
 
-    getId("play-button").remove();
-    containerDiv.remove();
+    playMatch(score1, score2) {
+        this.score1 = score1;
+        this.score2 = score2;
+    }
 
+    playPenalty(penalty1, penalty2) {
+        this.penalty1 = penalty1;
+        this.penalty2 = penalty2;
+    }
+}
+
+function prepareGroupRound() {
     for(var i = 0; i < 8; i++) {
         var groupCh = String.fromCharCode(i + 65);
         groups[groupCh] = {

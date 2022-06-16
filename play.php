@@ -28,36 +28,16 @@
             <div class="name-div">Baraże</div>
             <div style="clear: both"></div>
         </div>
-        <div id="play-off-matches-div"></div>
-        <button class="button" id="play-button" onclick="playMatch();">
-            Rozegraj Mecz
-        </button>
     </div>
 </div>
 <script>
 
     var teams;
-    var playOffTeams = {};
-
-    var namesPlayOff = [
-        "sco", "ukr", "wal",
-        "zae", "aus", "per",
-        "cri", "nzl"
-    ];
-
     serverGet("/create-mundial/get_data.php", null, function(text) {
-        var bufferObj = JSON.parse(text);
-        teams = bufferObj;
-
-        for(var name of namesPlayOff) {
-            playOffTeams[name] = teams[name];
-            delete teams[name];
-        }
-
-        createScript("play-offs-handler.js");
+        teams = JSON.parse(text);
         createScript("prepare-groups.js");
-
         createScript("group-round-handler.js");
+
         createScript("shared-obj-handler.js");
         createScript("knock-round-handler.js");
     });

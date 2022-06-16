@@ -1,26 +1,6 @@
-class Match {
-    constructor(teamObj1, teamObj2) {
-        var teamName1 = teamObj1.name;
-        var teamName2 = teamObj2.name;
-
-        this.team1 = teamName1;
-        this.team2 = teamName2;
-    
-        this.score1 = -1;
-        this.score2 = -1;
-
-        this.penalty1 = -1;
-        this.penalty2 = -1;
-    }
-
-    playMatch(score1, score2) {
-        this.score1 = score1;
-        this.score2 = score2;
-    }
-
-    playPenalty(penalty1, penalty2) {
-        this.penalty1 = penalty1;
-        this.penalty2 = penalty2;
+window.onload = function() {
+    if(WINNER == null) {
+        prepareGroupRound();
     }
 }
 

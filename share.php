@@ -74,13 +74,15 @@ if(isset($_POST['share-button'])) {
         $new_user_name = $user_name."_player".$date_name;
         $new_login = $date_login."_".random_string(6);
 
-        // mysqli_query($base, "INSERT INTO users(name, login) VALUES('$new_user_name', '$new_login');");
+        // Query
+        mysqli_query($base, "INSERT INTO users(name, login) VALUES('$new_user_name', '$new_login');");
         
         $get_user = mysqli_query($base, "SELECT id FROM users WHERE login = '$new_login';");
         while($row = mysqli_fetch_assoc($get_user)) $user_id = $row['id'];
     }
 
-    // mysqli_query($base, "INSERT INTO shared_games(user_id, description, creation_date) VALUES($user_id, '$description', '$date')");
+    // Query
+    mysqli_query($base, "INSERT INTO shared_games(user_id, description, creation_date) VALUES($user_id, '$description', '$date')");
     $get_game = mysqli_query($base, "SELECT id FROM shared_games WHERE user_id = $user_id AND creation_date = '$date';");
     while($row = mysqli_fetch_assoc($get_game)) $game_id = $row['id'];
 
@@ -104,7 +106,8 @@ function handle_groups($base, $obj, $game_id) {
         $match_counter = 0;
         foreach($group[1] as $match) {
             $group_char = strtoupper(chr($group_counter + 97));
-            // insert_match($base, $match, $game_id, 1, $group_char, $match_counter + 1);
+            // Query
+            insert_match($base, $match, $game_id, 1, $group_char, $match_counter + 1);
             $match_counter++;
         }
         $group_counter++;
@@ -118,10 +121,11 @@ function handle_groups($base, $obj, $game_id) {
         $stats_text = "";
 
         foreach($team_obj[1] as $stat) $stats_text = $stats_text.$stat.",";
-        // mysqli_query($base, <<<QUERY
-        //     INSERT INTO shared_teams (team_id, group_place, points, goals, goals_scored, goals_lost, wins, draws, loses, game_id) 
-        //     VALUES ('$team_name', $group_place, $stats_text $game_id);
-        // QUERY);
+        // Query
+        mysqli_query($base, <<<QUERY
+            INSERT INTO shared_teams (team_id, group_place, points, goals, goals_scored, goals_lost, wins, draws, loses, game_id) 
+            VALUES ('$team_name', $group_place, $stats_text $game_id);
+        QUERY);
         $counter++;
     }
 }
@@ -132,7 +136,8 @@ function handle_knock($base, $obj, $game_id) {
     foreach($obj as $round) {
         $match_counter = 0;
         foreach($round as $match) {
-            // insert_match($base, $match, $game_id, $round_counter, -1, $match_counter + 1);
+            // Query
+            insert_match($base, $match, $game_id, $round_counter, -1, $match_counter + 1);
             $match_counter++;
         }
         $round_counter++;
@@ -149,6 +154,7 @@ function insert_match($base, $match_obj, $game_id, $round_index, $group_name, $o
         if(($i == 4 || $i == 5) && $stat == -1) $stat = "NULL";
         $elements_text = $elements_text.$stat.", ";
     }
+    // Query
     mysqli_query($base, <<<QUERY
         INSERT INTO shared_matches(team1_id, team2_id, score_1, score_2, penalty_1, penalty_2, round_id, group_ch, order_nr, game_id)
         VALUES ($elements_text $round_index, $group_name_text, $order_nr, $game_id);

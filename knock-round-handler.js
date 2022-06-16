@@ -29,23 +29,22 @@ let names = [
 ];
 
 //DELETE
-prepareGroupRound();
-for(var i = 0; i < 8; i++) {
-    for(var j = 0; j < 6; j++) {
-        playGroupMatch();
-    }
-    loadNextGroup();
-}
+// prepareGroupRound();
+// for(var i = 0; i < 8; i++) {
+//     for(var j = 0; j < 6; j++) {
+//         playGroupMatch();
+//     }
+//     loadNextGroup();
+// }
 
-var counter = 0;
-while(counter < 16) {
+// var counter = 0;
+// while(counter < 16) {
     
-    if(playKnockMatch() == 2) {
-        playKnockMatch();
-    }
-    counter++;
-} 
-// endGame();
+//     if(playKnockMatch() == 2) {
+//         playKnockMatch();
+//     }
+//     counter++;
+// } 
 //DELETE
 
 function prepareKnockRound() {
