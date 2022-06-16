@@ -11,3 +11,11 @@ div#winner-name {
     color: #3f3f3f;
     text-shadow: 2px 2px 5px #838383;
 }
+
+input[name="user-name"] {
+
+}
+
+input[name="description"] {
+    
+}
