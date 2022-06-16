@@ -23,12 +23,14 @@ a:link, a:visited {
     text-decoration: none;
 }
 
+/* Background image of whole page */
 img#background {
     position: absolute;
     width: 100%;
     z-index: -1;
 }
 
+/* Logo image */
 img#logo {
     border: solid #949092 20px;
     width: 300px;
@@ -41,7 +43,12 @@ img#logo {
     box-shadow: 10px 10px 30px #131123;
 }
 
+/* Page Title */
 #logo-name {
+    position: relative;
+    float: left;
+    z-index: 0;
+
     width: 980px;
     height: var(--logo-height);
 
@@ -54,97 +61,19 @@ img#logo {
     text-align: center;
     line-height: var(--logo-height);
 
-    margin-top: -100px;
-    margin-left: -70px;
+    margin: 0px;
+    margin-top: 62px;
+    margin-left: -80px;
 
     /* border: solid #7d1433 15px; */
     background: linear-gradient(to right bottom, #949092, #5b5256);
     border-radius: 30px;
 }
 
-#container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#content {
-    background: linear-gradient(
-        to right bottom, white, #9e9b9d
-    );
-    width: 1200px;
-    height: 460px;
-
-    position: absolute;
-    top: 220px;
-    left: 500px;
-    border-radius: 30px;
-    box-shadow: 30px 30px 30px #131123;
-}
-
-#description {
-    width: 40%;
-    margin-left: 100px;
-    margin-top: 30px;
-
-    font: normal 42px 'Tahoma';
-    float: left;
-    color: #675b60;
-    text-shadow: 1px 1px 0.5px var(--button-color);
-    padding: 20px;
-    
-    border-radius: 30px;
-    background-color: #bbbbbb;
-    box-shadow: 15px 15px 10px gray;
-}
-
-#description div {
-    margin-top: 43px;
-}
-
-#description p {
-    text-shadow: 2px 2px 4px #5b5256;
-    font: bold 60px 'Calibri';
-    color: var(--button-color);
-    text-align: center;
-
-    margin: -10px;
-    padding: 0px;
-
-    background-color: #817377;
-    outline: solid #7d1433 10px;
-    border-radius: 20px;
-}
-
-#description span {
-    font: bold 45px 'Tahoma';
-    color: #6f4451
-}
-
-#button-div {
-    width: 40%;
-    float: left;
-
-    text-align: center;
-    padding-top: 40px;
-    margin-left: 50px;
-}
-
-#button-div img {
-    width: 400px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-}
-
+/* Main Button Styles */
 .button {
     outline: none;
     border: none;
-
-    right: 80px;
-    bottom: 80px;
-
-    width: 350px;
-    height: 70px;
 
     color: white;
     font: normal 30px 'Verdana';

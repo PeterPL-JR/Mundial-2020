@@ -24,16 +24,7 @@ img#logo {
     width: 100%;
 }
 
-#logo-name {
-    position: relative;
-    z-index: 0;
-
-    margin: 0px;
-    float: left;
-    margin-top: 62px;
-    margin-left: -80px
-}
-
+/* Main Div */
 #content {
     background: linear-gradient(
         to right bottom, white, #9e9b9d
