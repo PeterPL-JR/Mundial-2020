@@ -12,12 +12,9 @@ function createObject(groupsObj, knockObj) {
     var groupsString = JSON.stringify(groupsFinal);
     var knockString = JSON.stringify(knockFinal);
 
-    var button = getId("share-button");
-    button.onclick = function() {
-        serverPost("share_session.php", {groups: groupsString, knock: knockString}, function(session) {
-            window.location.href = "share.php?user=" + session;
-        });
-    }
+    serverGet("share_session.php", {groups: groupsString, knock: knockString, logged: false}, function(text) {
+        console.log(text);
+    });
 }
 
 function objectOfGroups() {

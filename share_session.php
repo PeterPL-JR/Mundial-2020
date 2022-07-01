@@ -1,32 +1,107 @@
 <?php
 
-session_start();
+include 'database.php';
 include 'library.php';
 
-$string_groups = $_POST['groups'];
-$string_knock = $_POST['knock'];
+$str_groups =  $_GET['groups'];
+$str_knock = $_GET['knock'];
+$logged = $_GET['logged'];
 
-unset($_POST['groups']);
-unset($_POST['knock']);
+$date = date("Y-m-d H:i:s");
+$date_name = date("ymd");
+$date_login = date("YmdHis");
+$long_id = random_string(24);
 
-if($string_groups == "" || $string_knock == "") {
-    header("Location: index.php");
-} else {
+$user_id = NULL;
+$game_id = NULL;
 
-    $session_name = random_string(18);
-    $_SESSION[$session_name."_groups_obji"] = $string_groups;
-    $_SESSION[$session_name."_knock_obji"] = $string_knock;
-    echo $session_name;
+if($logged == "false") {
+
+    $new_user_name = "player".$date_name;
+    $new_login = $date_login."_".random_string(6);
+
+    // Query (INSERT USER)
+    mysqli_query($base, "INSERT INTO users(name, login) VALUES('$new_user_name', '$new_login');");
+        
+    $get_user = mysqli_query($base, "SELECT id FROM users WHERE login = '$new_login';");
+    while($row = mysqli_fetch_assoc($get_user)) $user_id = $row['id'];
 }
 
-function parse_object($json_string) {
-    $new_string = "";
-    for($i = 1; $i < strlen($json_string) - 1; $i++) {
-        if($json_string[$i] != "\\") {
-            $new_string = $new_string.$json_string[$i];
+// Query (INSERT GAME)
+mysqli_query($base, "INSERT INTO shared_games(user_id, long_id, creation_date) VALUES($user_id, '$long_id', '$date')");
+$get_game = mysqli_query($base, "SELECT id FROM shared_games WHERE user_id = $user_id AND creation_date = '$date';");
+while($row = mysqli_fetch_assoc($get_game)) $game_id = $row['id'];
+
+$obj_groups = json_decode($str_groups);
+$obj_knock = json_decode($str_knock);
+
+// handle_groups($base, $obj_groups, $game_id);
+// handle_knock($base, $obj_knock, $game_id);
+
+echo $long_id;
+
+function handle_groups($base, $obj, $game_id) {
+    $teams = [];
+
+    $group_counter = 0;
+    foreach($obj as $group) {
+        foreach($group[0] as $team) {
+            array_push($teams, $team);
         }
+        $match_counter = 0;
+        foreach($group[1] as $match) {
+            $group_char = strtoupper(chr($group_counter + 97));
+            // Query
+            insert_match($base, $match, $game_id, 1, $group_char, $match_counter + 1);
+            $match_counter++;
+        }
+        $group_counter++;
     }
-    return json_decode($new_string);
+    
+    $counter = 0;
+    foreach($teams as $team_obj) {
+        
+        $team_name = $team_obj[0];
+        $group_place = ($counter % 4) + 1;
+        $stats_text = "";
+
+        foreach($team_obj[1] as $stat) $stats_text = $stats_text.$stat.",";
+        // Query (INSERT TEAMS)
+        mysqli_query($base, <<<QUERY
+            INSERT INTO shared_teams (team_id, group_place, points, goals, goals_scored, goals_lost, wins, draws, loses, game_id) 
+            VALUES ('$team_name', $group_place, $stats_text $game_id);
+        QUERY);
+        $counter++;
+    }
 }
 
-?>
+function handle_knock($base, $obj, $game_id) {
+
+    $round_counter = 2;
+    foreach($obj as $round) {
+        $match_counter = 0;
+        foreach($round as $match) {
+            // Query
+            insert_match($base, $match, $game_id, $round_counter, -1, $match_counter + 1);
+            $match_counter++;
+        }
+        $round_counter++;
+    }
+}
+
+function insert_match($base, $match_obj, $game_id, $round_index, $group_name, $order_nr) {
+    $elements_text = "'$match_obj[0]', '$match_obj[1]', ";
+    $group_name_text = ($group_name == -1) ? "NULL" : "'$group_name'";
+
+    for($i = 2; $i < count($match_obj); $i++) {
+
+        $stat = $match_obj[$i];
+        if(($i == 4 || $i == 5) && $stat == -1) $stat = "NULL";
+        $elements_text = $elements_text.$stat.", ";
+    }
+    // Query (INSERT MATCHES)
+    mysqli_query($base, <<<QUERY
+        INSERT INTO shared_matches(team1_id, team2_id, score_1, score_2, penalty_1, penalty_2, round_id, group_ch, order_nr, game_id)
+        VALUES ($elements_text $round_index, $group_name_text, $order_nr, $game_id);
+    QUERY);
+}

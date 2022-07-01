@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/share-styles.css">
 </head>
 <body>
-<img src="images/background.png" id="background">
+<!-- <img src="images/background.png" id="background"> -->
 <div id="container">
     <div id="header-div">
         <img src="images/logo.png" id="logo">
@@ -33,7 +33,7 @@
 <script>
 
     var teams;
-    serverGet("/create-mundial/get_data.php", null, function(text) {
+    serverGet("/create-mundial/get_data.php", {year: 2022}, function(text) {
         teams = JSON.parse(text);
         createScript("prepare-groups.js");
         createScript("group-round-handler.js");

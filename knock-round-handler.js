@@ -29,22 +29,22 @@ let names = [
 ];
 
 //DELETE
-// prepareGroupRound();
-// for(var i = 0; i < 8; i++) {
-//     for(var j = 0; j < 6; j++) {
-//         playGroupMatch();
-//     }
-//     loadNextGroup();
-// }
+prepareGroupRound();
+for(var i = 0; i < 8; i++) {
+    for(var j = 0; j < 6; j++) {
+        playGroupMatch();
+    }
+    loadNextGroup();
+}
 
-// var counter = 0;
-// while(counter < 16) {
+var counter = 0;
+while(counter < 16) {
     
-//     if(playKnockMatch() == 2) {
-//         playKnockMatch();
-//     }
-//     counter++;
-// } 
+    if(playKnockMatch() == 2) {
+        playKnockMatch();
+    }
+    counter++;
+} 
 //DELETE
 
 function prepareKnockRound() {
@@ -140,12 +140,12 @@ function setKnockMatchActive(matchIndex, active) {
 
     if(active) {
         knockInput1.onkeydown = function (event) {
-            if (event.key != "Backspace" && (numbers.indexOf(event.key) == -1 || knockInput1.value.length > 0)) {
+            if (event.key != "Backspace" && (!isNumber(event.key) || knockInput1.value.length > 0)) {
                 event.preventDefault();
             }
         }
         knockInput2.onkeydown = function (event) {
-            if (event.key != "Backspace" && (numbers.indexOf(event.key) == -1 || knockInput2.value.length > 0)) {
+            if (event.key != "Backspace" && (!isNumber(event.key) || knockInput2.value.length > 0)) {
                 event.preventDefault();
             }
         }

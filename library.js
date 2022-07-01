@@ -55,3 +55,29 @@ function createScript(src) {
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function isNumber(char) {
+    const numbers = [];
+    for(var i = 0; i <= 9; i++) {
+        numbers.push(`${i}`);
+    }
+    if(numbers.indexOf(char) != -1) {
+        return true;
+    }
+    return false;
+}
+
+function isLetter(char) {
+    const letters = [];
+    for(var i = 0; i < 26; i++) {
+        var lower = String.fromCharCode(i + 97);
+        var upper = lower.toUpperCase();
+
+        letters.push(lower);
+        letters.push(upper);
+    }
+    if(letters.indexOf(char) != -1) {
+        return true;
+    }
+    return false;
+}

@@ -97,12 +97,12 @@ function setGroupMatchActive(matchIndex, active) {
 
     if(active) {
         input1.onkeydown = function (event) {
-            if (event.key != "Backspace" && (numbers.indexOf(event.key) == -1 || input1.value.length > 0)) {
+            if (event.key != "Backspace" && (!isNumber(event.key) || input1.value.length > 0)) {
                 event.preventDefault();
             }
         }
         input2.onkeydown = function (event) {
-            if (event.key != "Backspace" && (numbers.indexOf(event.key) == -1 || input2.value.length > 0)) {
+            if (event.key != "Backspace" && (!isNumber(event.key) || input2.value.length > 0)) {
                 event.preventDefault();
             }
         }
