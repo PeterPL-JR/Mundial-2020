@@ -311,7 +311,7 @@ function endGame() {
     groupPlayButton.remove();
 
     getClass("name-div")[0].innerHTML = "Zwycięzca";
-    getId("content").style.height = "410px";
+    getId("content").style.height = "400px";
 
     var flagImage = document.createElement("img");
     flagImage.src = "flags/" + teams[WINNER].link;
@@ -324,15 +324,15 @@ function endGame() {
     contentDiv.appendChild(flagImage);
     contentDiv.appendChild(nameDiv);
 
-    var button = document.createElement("button");
-    button.className = "button";
-    button.id = "share-button";
-    button.innerHTML = "Udostępnij";
+    // var button = document.createElement("button");
+    // button.className = "button";
+    // button.id = "share-button";
+    // button.innerHTML = "Udostępnij";
 
-    button.style.width = "330px";
-    button.style.fontSize = "30px";
-    button.style.marginTop = "45px";
-    contentDiv.appendChild(button);
+    // button.style.width = "330px";
+    // button.style.fontSize = "30px";
+    // button.style.marginTop = "45px";
+    // contentDiv.appendChild(button);
 
     createObject(groups, allKnockMatches);
 }

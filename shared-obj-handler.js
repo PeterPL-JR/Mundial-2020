@@ -13,7 +13,11 @@ function createObject(groupsObj, knockObj) {
     var knockString = JSON.stringify(knockFinal);
 
     serverGet("share_session.php", {groups: groupsString, knock: knockString, logged: false}, function(text) {
-        console.log(text);
+        var button = document.createElement("button");
+        button.id = "share-button";
+        button.className = "button";
+        button.innerHTML = `<a href="${text}">Udostępnij</a>`;
+        contentDiv.appendChild(button);
     });
 }
 

@@ -1,3 +1,5 @@
+
+
 img#winner-flag {
     width: 100px;
     border-radius: 15px;
@@ -18,4 +20,21 @@ input[name="user-name"] {
 
 textarea[name="description"] {
     resize: none;
+}
+
+:root {
+    --height: 34px;
+    --padding: 20px;
+
+    --basic-color: #7d1433;
+    --dark-color: #4e0b1f;
+    --light-color: #af4464;
+}
+
+#share-button {
+    height: 48px;
+    width: 260px !important;
+
+    margin-top: 25px !important;
+    margin: auto;
 }

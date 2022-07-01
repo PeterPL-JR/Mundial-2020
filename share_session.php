@@ -1,6 +1,7 @@
 <?php
 
 include 'database.php';
+include 'link.php';
 include 'library.php';
 
 $str_groups =  $_GET['groups'];
@@ -10,7 +11,9 @@ $logged = $_GET['logged'];
 $date = date("Y-m-d H:i:s");
 $date_name = date("ymd");
 $date_login = date("YmdHis");
+
 $long_id = random_string(24);
+$shared_link = $link."shared-games.php?id=".$long_id;
 
 $user_id = NULL;
 $game_id = NULL;
@@ -22,7 +25,6 @@ if($logged == "false") {
 
     // Query (INSERT USER)
     mysqli_query($base, "INSERT INTO users(name, login) VALUES('$new_user_name', '$new_login');");
-        
     $get_user = mysqli_query($base, "SELECT id FROM users WHERE login = '$new_login';");
     while($row = mysqli_fetch_assoc($get_user)) $user_id = $row['id'];
 }
@@ -38,7 +40,7 @@ $obj_knock = json_decode($str_knock);
 // handle_groups($base, $obj_groups, $game_id);
 // handle_knock($base, $obj_knock, $game_id);
 
-echo $long_id;
+echo $shared_link;
 
 function handle_groups($base, $obj, $game_id) {
     $teams = [];
