@@ -1,5 +1,8 @@
 <?php
 
+$_groups_obj = [];
+$_knock_obj = [];
+
 include 'database.php';
 $long_id = $_GET['id'];
 
@@ -9,15 +12,10 @@ $array = mysqli_fetch_assoc($get_query);
 $game_id = $array['id'];
 $user_name = $array['name'];
 
-$_groups_obj = [];
-$_knock_obj = [];
-
 create_groups_obj();
 create_knock_obj();
 
-// $encode = json_encode($_groups_obj);
-// echo "<script>console.log($encode);</script>";
-
+// Function for creating 'Group Round' object
 function create_groups_obj() {
     global $_groups_obj;
 
@@ -28,8 +26,27 @@ function create_groups_obj() {
     }
 }
 
+// Function for creating 'Knockout Round' object
 function create_knock_obj() {
+    global $_knock_obj, $base, $game_id;
+    for($i = 0; $i <= 4; $i++) {
+        $round_id = $i + 2;
+        $round_query = mysqli_query($base, "SELECT team1_id, team2_id, score_1, score_2, penalty_1, penalty_2 FROM shared_matches WHERE game_id = 344 AND round_id = $round_id;");
+        $_knock_obj[$i] = [];
 
+        while($row = mysqli_fetch_assoc($round_query)) {
+            array_push($_knock_obj[$i], [
+                "team1" => $row['team1_id'],
+                "team2" => $row['team2_id'],
+            
+                "score1" => (int) $row['score_1'],
+                "score2" => (int) $row['score_2'],
+
+                "penalty1" => ($row['penalty_1'] == NULL) ? -1 : (int) $row['penalty_1'],
+                "penalty2" => ($row['penalty_2'] == NULL) ? -1 : (int) $row['penalty_2']
+            ]);
+        }
+    }
 }
 
 function get_groups_teams($group_ch) {
@@ -63,6 +80,7 @@ function get_groups_teams($group_ch) {
     }
     return $array;
 }
+
 function get_groups_matches($group_ch) {
     global $base, $game_id;
     $array = [];
