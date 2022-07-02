@@ -1,5 +1,5 @@
-let contentDiv = getId("content");
-let roundNameDiv = document.querySelector(".round-name .name-div");
+let contentDiv;
+let roundNameDiv;
 let groupPlayButton;
 
 let groups = {};
@@ -137,9 +137,9 @@ function createGroupPage(groupChar) {
         var random2 = getRandom(0, 3);
 
         //DELETE
-        // random1 = "";
-        // random2 = "";
-        //DELETE
+        random1 = "";
+        random2 = "";
+        //
 
         matchesTableText +=
         `<div class="group-match ${color}">

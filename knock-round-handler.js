@@ -29,23 +29,25 @@ let names = [
 ];
 
 //DELETE
-prepareGroupRound();
-for(var i = 0; i < 8; i++) {
-    for(var j = 0; j < 6; j++) {
-        playGroupMatch();
+function auto_mundial() {
+    prepareGroupRound();
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 6; j++) {
+            playGroupMatch();
+        }
+        loadNextGroup();
     }
-    loadNextGroup();
-}
 
-var counter = 0;
-while(counter < 16) {
-    
-    if(playKnockMatch() == 2) {
-        playKnockMatch();
+    var counter = 0;
+    while (counter < 16) {
+
+        if (playKnockMatch() == 2) {
+            playKnockMatch();
+        }
+        counter++;
     }
-    counter++;
-} 
-//DELETE
+}
+//
 
 function prepareKnockRound() {
 
@@ -68,7 +70,7 @@ function prepareKnockRound() {
         new Match(knockQualified['H'][0], knockQualified['G'][1])
     ];
 
-    groupPlayButton.onclick = function() {
+    groupPlayButton.onclick = function () {
         playKnockMatch("match");
     }
 
@@ -101,11 +103,11 @@ function createKnockMatch(knockMatchObj, pageIndex) {
     var random2 = getRandom(0, 3);
 
     //DELETE
-    // random1 = "";
-    // random2 = "";
-    //DELETE
+    random1 = "";
+    random2 = "";
+    //
 
-    knockMatch.innerHTML = 
+    knockMatch.innerHTML =
         `<div class="team-1 team-div">
             <img src="${link1}" class="flag">
             <div class="team-name">${teamName1}</div>
@@ -138,7 +140,7 @@ function setKnockMatchActive(matchIndex, active) {
     knockInput1 = matchDiv.querySelectorAll("input")[0];
     knockInput2 = matchDiv.querySelectorAll("input")[1];
 
-    if(active) {
+    if (active) {
         knockInput1.onkeydown = function (event) {
             if (event.key != "Backspace" && (!isNumber(event.key) || knockInput1.value.length > 0)) {
                 event.preventDefault();
@@ -166,52 +168,52 @@ function setKnockMatchActive(matchIndex, active) {
 function playKnockMatch() {
     var score1 = parseInt(knockInput1.value);
     var score2 = parseInt(knockInput2.value);
-    
+
     var bufferWinners = [];
     var scoreTotal = -1;
 
-    if(isNaN(score1) || isNaN(score2)) return scoreTotal;
+    if (isNaN(score1) || isNaN(score2)) return scoreTotal;
 
-    if(score1 == score2) {
+    if (score1 == score2) {
         scoreTotal = Draw;
 
-        if(currentMode == "match") {
+        if (currentMode == "match") {
             knockMatches[currentKnockMatchIndex].playMatch(score1, score2);
             currentMode = "penalty";
             createPenalty();
         }
         return scoreTotal;
     }
-    
-    if(currentMode == "penalty") {
+
+    if (currentMode == "penalty") {
         groupPlayButton.innerHTML = "Rozegraj Mecz";
         knockMatches[currentKnockMatchIndex].playPenalty(score1, score2);
         currentMode = "match";
-        
-    } else if(currentMode == "match") {
+
+    } else if (currentMode == "match") {
         knockMatches[currentKnockMatchIndex].playMatch(score1, score2);
     }
 
-    if(currentKnockRoundIndex == 2) {
+    if (currentKnockRoundIndex == 2) {
         var knockOut = knockMatches[currentKnockMatchIndex];
 
-        if(score1 > score2) {
+        if (score1 > score2) {
             scoreTotal = Winner1;
-            
+
             finalists.push(knockOut.team1);
             losers.push(knockOut.team2);
-        } else if(score1 < score2) {
+        } else if (score1 < score2) {
             scoreTotal = Winner2;
-            
+
             finalists.push(knockOut.team2);
             losers.push(knockOut.team1);
         }
     } else {
-        if(score1 > score2) {
+        if (score1 > score2) {
             scoreTotal = Winner1;
             winners.push(knockMatches[currentKnockMatchIndex].team1);
 
-        } else if(score1 < score2) {
+        } else if (score1 < score2) {
             scoreTotal = Winner2;
             winners.push(knockMatches[currentKnockMatchIndex].team2);
         }
@@ -220,19 +222,19 @@ function playKnockMatch() {
     setKnockMatchActive(currentKnockMatchIndex, false);
 
     currentKnockMatchIndex++;
-    if(currentKnockMatchIndex >= currentMatchesCount) {
-        
+    if (currentKnockMatchIndex >= currentMatchesCount) {
+
         allKnockMatches[currentKnockRoundIndex] = knockMatches;
         knockMatches = [];
 
-        if(currentKnockRoundIndex == 2) {
+        if (currentKnockRoundIndex == 2) {
             knockMatches.push(new Match(teams[losers[0]], teams[losers[1]]));
             losers = [];
-        } else if(currentKnockRoundIndex == 3) {
+        } else if (currentKnockRoundIndex == 3) {
             knockMatches.push(new Match(teams[finalists[0]], teams[finalists[1]]));
         } else {
-            for(var i = 0; i < winners.length / 2; i++) {
-                
+            for (var i = 0; i < winners.length / 2; i++) {
+
                 var teamObj1 = teams[winners[i * 2]];
                 var teamObj2 = teams[winners[i * 2 + 1]];
                 knockMatches.push(new Match(teamObj1, teamObj2));
@@ -245,27 +247,27 @@ function playKnockMatch() {
         currentKnockMatchIndex = 0;
         currentKnockRoundIndex++;
 
-        if(currentMatchesCount >= 2) {
+        if (currentMatchesCount >= 2) {
             currentMatchesCount /= 2;
         }
     }
 
-    if(currentKnockMatchIndex % 2 == 0) {
+    if (currentKnockMatchIndex % 2 == 0) {
         var div1 = getId("knock-match-0");
         var div2 = getId("knock-match-1");
 
         div1.remove();
-        if(currentKnockRoundIndex <= 3) {
+        if (currentKnockRoundIndex <= 3) {
             div2.remove();
         }
 
-        if(currentKnockRoundIndex >= names.length) {
+        if (currentKnockRoundIndex >= names.length) {
             WINNER = bufferWinners[1];
             endGame();
             return scoreTotal;
         }
 
-        if(currentMatchesCount == 1) {
+        if (currentMatchesCount == 1) {
             createKnockMatch(knockMatches[currentKnockMatchIndex], 0);
             setKnockMatchActive(currentKnockMatchIndex, true);
             return scoreTotal;
@@ -285,26 +287,23 @@ function createPenalty() {
 
     var random1 = getRandom(0, 5);
     var random2 = getRandom(0, 5);
-    
-    if(random1 == random2) {
+
+    if (random1 == random2) {
         var randomYm = getRandom(0, 1);
-        if(randomYm == 0) random1++;
-        else if(randomYm == 1) random2++;    
+        if (randomYm == 0) random1++;
+        else if (randomYm == 1) random2++;
     }
 
     knockInput1.value = random1;
     knockInput2.value = random2;
 
-    // knockInput1.value = "";
-    // knockInput2.value = "";
+    // DELETE
+    knockInput1.value = "";
+    knockInput2.value = "";
 
     knockInput1.focus();
     groupPlayButton.innerHTML = "Rozegraj Karne";
 }
-
-//DELETE
-// endGame();
-//DELETE
 
 function endGame() {
     roundEnd = true;
@@ -316,23 +315,12 @@ function endGame() {
     var flagImage = document.createElement("img");
     flagImage.src = "flags/" + teams[WINNER].link;
     flagImage.id = "winner-flag";
-    
+
     var nameDiv = document.createElement("div");
     nameDiv.id = "winner-name";
     nameDiv.innerHTML = teams[WINNER].fullName;
-    
+
     contentDiv.appendChild(flagImage);
     contentDiv.appendChild(nameDiv);
-
-    // var button = document.createElement("button");
-    // button.className = "button";
-    // button.id = "share-button";
-    // button.innerHTML = "Udostępnij";
-
-    // button.style.width = "330px";
-    // button.style.fontSize = "30px";
-    // button.style.marginTop = "45px";
-    // contentDiv.appendChild(button);
-
     createObject(groups, allKnockMatches);
 }

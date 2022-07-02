@@ -37,8 +37,8 @@ while($row = mysqli_fetch_assoc($get_game)) $game_id = $row['id'];
 $obj_groups = json_decode($str_groups);
 $obj_knock = json_decode($str_knock);
 
-// handle_groups($base, $obj_groups, $game_id);
-// handle_knock($base, $obj_knock, $game_id);
+handle_groups($base, $obj_groups, $game_id);
+handle_knock($base, $obj_knock, $game_id);
 
 echo $shared_link;
 

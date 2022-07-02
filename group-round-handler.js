@@ -1,9 +1,3 @@
-window.onload = function() {
-    if(WINNER == null) {
-        prepareGroupRound();
-    }
-}
-
 function scoreMatchTeam(score1, score2, team1, team2) {
 
     team1.stats.goalsScored += score1;

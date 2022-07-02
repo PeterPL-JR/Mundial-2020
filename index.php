@@ -30,17 +30,43 @@
         </div>
     </div>
 </div>
-<script>
+<script id="init-script">
+
+    function createScript(src, variable, index) {
+        var script = document.createElement("script");
+        script.src = src;
+        script.onload = function() { variable[index] = true; };
+        document.body.appendChild(script);
+    }
+
+    var scripts = [];
+    var int = setInterval(function() {
+        var loaded = true;
+        for(var elem of scripts) {
+            if(!elem) loaded = false;
+        }
+        if(loaded) {
+            start();
+            clearInterval(int);
+        };
+    }, 100);
 
     var teams;
     serverGet("/create-mundial/get_data.php", {year: 2022}, function(text) {
         teams = JSON.parse(text);
-        createScript("prepare-groups.js");
-        createScript("group-round-handler.js");
+        createScript("prepare-groups.js", scripts, 0);
+        createScript("group-round-handler.js", scripts, 1);
 
-        createScript("shared-obj-handler.js");
-        createScript("knock-round-handler.js");
+        createScript("shared-obj-handler.js", scripts, 2);
+        createScript("knock-round-handler.js", scripts, 3);
     });
+
+    function start() {
+        contentDiv = getId("content");
+        roundNameDiv = document.querySelector(".round-name .name-div");
+        prepareGroupRound();
+        // auto_mundial();
+    }
 </script>
 </body>
 </html>
