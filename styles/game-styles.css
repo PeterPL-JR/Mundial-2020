@@ -1,16 +1,12 @@
 img#logo {
     position: relative;
-    border: solid #949092 17px;
+    border: solid var(--logo-border-color) 17px;
     width: 250px;
     z-index: 1;
 
     left: 20px;
     top: 20px;
     float: left;
-}
-
-:root {
-    --shadow-color: #3d0919;
 }
 
 #container {
@@ -63,12 +59,12 @@ img#logo {
 
 .round-name div:nth-child(2) {
     box-shadow: 
-    8px 8px 20px var(--shadow-color),
-    -8px -8px 20px var(--shadow-color),
-    -8px 8px 20px var(--shadow-color),
-    8px -8px 20px var(--shadow-color);
+    8px 8px 20px var(--shadow-color-2),
+    -8px -8px 20px var(--shadow-color-2),
+    -8px 8px 20px var(--shadow-color-2),
+    8px -8px 20px var(--shadow-color-2);
 
-    background: linear-gradient(to right bottom, #949092, #5b5256);
+    background: linear-gradient(to right bottom, var(--gray-color-light), var(--gray-color-dark));
     border-radius: 20px;
 
     width: 80%;

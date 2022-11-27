@@ -1,5 +1,5 @@
 <?php
 
-$link = "http://localhost/create-mundial/";
+$link = "http://league-online.epizy.com/create-mundial/";
 
 ?>

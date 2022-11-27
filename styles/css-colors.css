@@ -1,0 +1,29 @@
+:root {
+    /* Colors 2022 */
+    --basic-color-2022: #7d1433;
+    --shadow-color-1-2022: #4e0b1f;
+    --shadow-color-2-2022: #3d0919;
+    --logo-border-color-2022: #949092;
+
+    --button-color-1-2022: #7d1433;
+    --button-color-2-2022: #4e0b1f;
+    --button-first-color-2022: #af4464;
+    --button-second-color-2022: #af4464;
+
+    --gray-color-light-2022: #949092;
+    --gray-color-dark-2022: #5b5256;
+    
+    /* Colors 2018 */
+    --basic-color-2018: #0c305d;
+    --shadow-color-1-2018: #071d37;
+    --shadow-color-2-2018: #0b2c54;
+    --logo-border-color-2018: #0f407b;
+
+    --button-color-1-2018: #832728;
+    --button-color-2-2018: #681f20;
+    --button-first-color-2018: #c05d4c;
+    --button-second-color-2018: #c05d4c;
+
+    --gray-color-light-2018: #c05d4c;
+    --gray-color-dark-2018: #832728;
+}

@@ -210,7 +210,7 @@ function createTable(group) {
     for(var i = 0; i < 4; i++) {
 
         var image = records[i].querySelector("img");
-        image.src = "flags/" + teams[i].link;
+        image.src = "../flags/" + teams[i].link;
 
         var nameElem = records[i].querySelector(".name-elem");
         var pointsElem = records[i].querySelector(".points-elem");

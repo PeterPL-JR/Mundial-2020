@@ -12,7 +12,8 @@ function createObject(groupsObj, knockObj) {
     var groupsString = JSON.stringify(groupsFinal);
     var knockString = JSON.stringify(knockFinal);
 
-    serverGet("share_session.php", {groups: groupsString, knock: knockString, logged: false}, function(text) {
+    const URL = "/create-mundial/share_session.php";
+    serverGet(URL, {groups: groupsString, knock: knockString, logged: false, year: YEAR}, function(text) {
         var button = document.createElement("button");
         button.id = "share-button";
         button.className = "button";

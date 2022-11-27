@@ -88,8 +88,8 @@ function createKnockMatch(knockMatchObj, pageIndex) {
     var teamName1 = team1.fullName;
     var teamName2 = team2.fullName;
 
-    var link1 = "flags/" + team1.link;
-    var link2 = "flags/" + team2.link;
+    var link1 = "../flags/" + team1.link;
+    var link2 = "../flags/" + team2.link;
 
     var knockMatch = document.createElement("div");
     knockMatch.className = "knock-match";
@@ -313,7 +313,7 @@ function endGame() {
     getId("content").style.height = "400px";
 
     var flagImage = document.createElement("img");
-    flagImage.src = "flags/" + teams[WINNER].link;
+    flagImage.src = "../flags/" + teams[WINNER].link;
     flagImage.id = "winner-flag";
 
     var nameDiv = document.createElement("div");

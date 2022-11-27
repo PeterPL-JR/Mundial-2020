@@ -23,6 +23,7 @@ if(count($array) == 0) {
     ]);
 }
 
+
 // Function for creating 'Group Round' object
 function create_groups_obj() {
     global $_groups_obj;

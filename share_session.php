@@ -7,6 +7,7 @@ include 'library.php';
 $str_groups =  $_GET['groups'];
 $str_knock = $_GET['knock'];
 $logged = $_GET['logged'];
+$year = $_GET['year'];
 
 $date = date("Y-m-d H:i:s");
 $date_name = date("ymd");
@@ -30,7 +31,7 @@ if($logged == "false") {
 }
 
 // Query (INSERT GAME)
-mysqli_query($base, "INSERT INTO shared_games(user_id, long_id, creation_date) VALUES($user_id, '$long_id', '$date')");
+mysqli_query($base, "INSERT INTO shared_games(user_id, long_id, creation_date, year) VALUES($user_id, '$long_id', '$date', $year)");
 $get_game = mysqli_query($base, "SELECT id FROM shared_games WHERE user_id = $user_id AND creation_date = '$date';");
 while($row = mysqli_fetch_assoc($get_game)) $game_id = $row['id'];
 

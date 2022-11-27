@@ -11,11 +11,6 @@ body {
 
 :root {
     --logo-height: 140px;
-    --basic-color: #7d1433;
-
-    --button-color: #4e0b1f;
-    --button-first-color: #af4464;
-    --button-second-color: #af4464;
 }
 
 a:link, a:visited {
@@ -32,7 +27,7 @@ img#background {
 
 /* Logo image */
 img#logo {
-    border: solid #949092 20px;
+    border: solid var(--logo-border-color) 20px;
     width: 300px;
 
     position: relative;
@@ -55,7 +50,7 @@ img#logo {
     color: white;
     font: bold 90px 'Caladea';
     text-shadow: -5px -5px 3px var(--basic-color);
-    box-shadow: 10px 10px 30px var(--button-color);
+    box-shadow: 10px 10px 30px var(--shadow-color-1);
     border: solid 20px var(--basic-color);
 
     text-align: center;
@@ -66,7 +61,7 @@ img#logo {
     margin-left: -80px;
 
     /* border: solid #7d1433 15px; */
-    background: linear-gradient(to right bottom, #949092, #5b5256);
+    background: linear-gradient(to right bottom, var(--gray-color-light), var(--gray-color-dark));
     border-radius: 30px;
 }
 
@@ -79,17 +74,17 @@ img#logo {
     font: normal 30px 'Verdana';
     border-radius: 10px;
     background: linear-gradient(
-        var(--basic-color), 
+        var(--button-color-1), 
         var(--button-first-color), 
-        var(--basic-color)
+        var(--button-color-1)
     ); 
 }
 
 .button:hover {
     cursor: pointer;
     background: linear-gradient(
-        var(--button-color), 
+        var(--button-color-2), 
         var(--button-second-color), 
-        var(--button-color)
+        var(--button-color-2)
     ); 
 }
