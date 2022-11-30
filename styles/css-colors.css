@@ -1,4 +1,18 @@
 :root {
+    /* Custom Mundial Colors */
+    --basic-color-custom: #344e38;
+    --shadow-color-1-custom: #0d180d;
+    --shadow-color-2-custom: #0d180d;
+    --logo-border-color-custom: #949092;
+
+    --button-color-1-custom: #195819;
+    --button-color-2-custom: #093a09;
+    --button-first-color-custom: #40a450;
+    --button-second-color-custom: #40a450;
+
+    --gray-color-light-custom: #949092;
+    --gray-color-dark-custom: #5b5256;
+
     /* Colors 2022 */
     --basic-color-2022: #7d1433;
     --shadow-color-1-2022: #4e0b1f;
@@ -26,4 +40,18 @@
 
     --gray-color-light-2018: #c05d4c;
     --gray-color-dark-2018: #832728;
+	
+	/* Colors 2014 */
+    --basic-color-2014: #0c305d;
+    --shadow-color-1-2014: #071d37;
+    --shadow-color-2-2014: #0b2c54;
+    --logo-border-color-2014: #0f407b;
+
+    --button-color-1-2014: #832728;
+    --button-color-2-2014: #681f20;
+    --button-first-color-2014: #c05d4c;
+    --button-second-color-2014: #c05d4c;
+
+    --gray-color-light-2014: #c05d4c;
+    --gray-color-dark-2014: #832728;
 }

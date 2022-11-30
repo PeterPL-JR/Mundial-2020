@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Mundial 2018 - Wytypuj Wyniki</title>
+    <title>Mundial 2014 - Wytypuj Wyniki</title>
     <script src="../scripts/library.js"></script>
     <script src="../scripts/styles-handler.js"></script>
 
@@ -22,7 +22,7 @@
 <div id="container">
     <div id="header-div">
         <img src="../images/logo2018.png" id="logo">
-        <div id="logo-name">Mundial 2018</div>
+        <div id="logo-name">Mundial 2014</div>
         <div style="clear: both;"></div>
     </div>
     <div id="content">
@@ -35,7 +35,7 @@
 </div>
 <script src="../initMainPage.js" id="init-script"></script>
 <script>
-    initIndex(2018);
+    initIndex(2014);
 </script>
 </body>
 </html>

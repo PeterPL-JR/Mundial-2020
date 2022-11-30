@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Mundial 2022 - Wytypuj Wyniki</title>
-    <script src="../library.js"></script>
+    <script src="../scripts/library.js"></script>
+    <script src="../scripts/styles-handler.js"></script>
 
     <link rel="icon" href="../images/logo2022.png" type="image/png">
     <link rel="stylesheet" href="../styles/css-colors.css">
@@ -32,7 +33,7 @@
         </div>
     </div>
 </div>
-<script src="../initIndex.js" id="init-script"></script>
+<script src="../initMainPage.js" id="init-script"></script>
 <script>
     initIndex(2022);
 </script>

@@ -4,7 +4,7 @@ $base = mysqli_connect(
     "localhost",
     "root",
     "",
-    "scores_league"
+    "nb_scores_league"
 );
 
 /*

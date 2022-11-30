@@ -1,0 +1,8 @@
+:root {
+    --bold-color: #40a450;
+}
+
+#logo-name b {
+    color: var(--bold-color);
+    text-shadow: 6px 6px 2px var(--basic-color);
+}
