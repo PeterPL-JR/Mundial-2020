@@ -1,6 +1,7 @@
-const URL = "/create-mundial/get_data.php";
+const DB_URL = "/create-mundial/get_db_data.php";
 const scripts = [];
 let teams = {};
+let confeds = [];
 let YEAR = "NULL";
 
 const MODE_PREDICT = 0;
@@ -11,7 +12,8 @@ const CUSTOM = 0;
 
 function start() {
     contentDiv = getId("content");
-    roundNameDiv = document.querySelector(".round-name .name-div");
+    roundNameDiv = document.querySelector(".round-name");
+    nameDiv = document.querySelector(".round-name .name-div");
 
     if(mode == MODE_PREDICT) prepareGroupRound();
     if(mode == MODE_CUSTOM) preparePots();
@@ -24,7 +26,7 @@ function initIndex(year) {
     
     mode = MODE_PREDICT;
     YEAR = year;
-    serverGet(URL, {year}, function(text) {
+    serverGet(DB_URL, {year}, function(text) {
         init(text);
     });
 }
@@ -33,7 +35,7 @@ function initCustom() {
     initCustomStyles();
     
     mode = MODE_CUSTOM;
-    serverGet(URL, {}, function(text) {
+    serverGet(DB_URL, {}, function(text) {
         init(text);
     });
 }
@@ -46,6 +48,17 @@ function init(text) {
 
     createScript("shared-obj-handler.js", scripts, 2);
     createScript("knock-round-handler.js", scripts, 3);
+
+    serverGet(DB_URL, {get_confeds: null}, function(text) {
+        const confedsNames = JSON.parse(text);
+        for(let i = 0; i < confedsNames.length; i++) {
+            confeds[i] = {
+                name: confedsNames[i],
+                teams: null,
+                maxInGroup: null
+            };         
+        }
+    });
 }
 
 function setScriptsInterval() {

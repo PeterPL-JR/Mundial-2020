@@ -50,7 +50,6 @@ function auto_mundial() {
 //
 
 function prepareKnockRound() {
-
     getId("group-div").remove();
     getId("matches-div").remove();
 
@@ -80,7 +79,7 @@ function prepareKnockRound() {
 }
 
 function createKnockMatch(knockMatchObj, pageIndex) {
-    roundNameDiv.innerHTML = names[currentKnockRoundIndex];
+    nameDiv.innerHTML = names[currentKnockRoundIndex];
 
     var team1 = teams[knockMatchObj.team1];
     var team2 = teams[knockMatchObj.team2];
@@ -88,8 +87,8 @@ function createKnockMatch(knockMatchObj, pageIndex) {
     var teamName1 = team1.fullName;
     var teamName2 = team2.fullName;
 
-    var link1 = "../flags/" + team1.link;
-    var link2 = "../flags/" + team2.link;
+    var link1 = "/create-mundial/flags/" + team1.link;
+    var link2 = "/create-mundial/flags/" + team2.link;
 
     var knockMatch = document.createElement("div");
     knockMatch.className = "knock-match";
@@ -313,7 +312,7 @@ function endGame() {
     getId("content").style.height = "400px";
 
     var flagImage = document.createElement("img");
-    flagImage.src = "../flags/" + teams[WINNER].link;
+    flagImage.src = "/create-mundial/flags/" + teams[WINNER].link;
     flagImage.id = "winner-flag";
 
     var nameDiv = document.createElement("div");

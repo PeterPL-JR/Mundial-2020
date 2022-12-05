@@ -33,7 +33,7 @@
         </div>
     </div>
 </div>
-<script src="../initMainPage.js" id="init-script"></script>
+<script src="../init-main-page.js" id="init-script"></script>
 <script>
     initIndex(2014);
 </script>

@@ -27,16 +27,19 @@
         <div style="clear: both;"></div>
     </div>
     <div id="content">
-        <div class="round-name">
+        <div class="pots-round-name round-name">
             <img src="images/ball.png">
             <div class="name-div">Koszyki</div>
             <div style="clear: both"></div>
         </div>
-        <button class="button">Zatwierdź</button>
+        <div id='pots-titles-div'></div>
+        <div id="pots-div"></div>
+        <button id="start-button" class="button">Zatwierdź</button>
     </div>
 </div>
-<script src="initMainPage.js" id="init-script"></script>
+<script src="init-main-page.js" id="init-script"></script>
 <script src="prepare-pots.js"></script>
+<script src="draw-handler.js"></script>
 <script>
     initCustom();
 </script>

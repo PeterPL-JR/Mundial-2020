@@ -5,9 +5,7 @@
 
 /* Table of Group Teams */
 #group-table {
-    box-shadow: 
-    18px 18px 20px #808080,
-    -13px -13px 20px #808080;
+    box-shadow: 18px 18px 20px #808080, -13px -13px 20px #808080;
     
     border-radius: 20px;
     border-collapse: collapse;
@@ -38,18 +36,19 @@
 }
 
 /* Flag Element */
-.flag-elem {
+#group-table .flag-elem {
     text-align: center;
     padding-left: 30px;
 }
-.flag-elem img {
+#group-table .flag-elem img {
     height: 40px;
     box-shadow: 3px 3px 10px #4e4e4e;
     border-radius: 6px;
+    image-rendering: pixelated;
 }
 
 /* Team Name Element */
-.name-elem {
+#group-table .name-elem {
     width: 240px;
     text-align: left;
     padding-left: 20px;
@@ -57,7 +56,7 @@
     color: var(--font-color);
 }
 
-.points-elem {
+#group-table .points-elem {
     width: 52px;
     font: bold 28px 'Verdana';
     color: var(--font-color);
@@ -66,7 +65,7 @@
     border-right: solid var(--border-color) 4px;
 }
 
-.goals-elem {
+#group-table .goals-elem {
     width: 90px;
     font: bold 20px 'Verdana';
     color: var(--font-color);

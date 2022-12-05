@@ -1,5 +1,7 @@
 let contentDiv;
 let roundNameDiv;
+
+let nameDiv;
 let groupPlayButton;
 
 let groups = {};
@@ -83,27 +85,28 @@ function prepareGroupRound() {
     var groupDiv = document.createElement("div");
     var matchesDiv = document.createElement("div");
 
+    roundNameDiv.className = "round-name";
     groupDiv.id = "group-div";
     matchesDiv.id = "matches-div";
 
     contentDiv.appendChild(groupDiv);
     contentDiv.appendChild(matchesDiv);
+    createClearBoth(contentDiv);
 
     var button = document.createElement("button");
+    button.id = "play-button";
     button.className = "button";
     button.innerHTML = "Rozegraj Mecz";
     button.onclick = playGroupMatch;
-    groupPlayButton = button;
 
-    button.style.marginTop = "86px";
-    button.style.marginTop = "86px";
+    groupPlayButton = button;
     contentDiv.appendChild(button);
 
     createGroupPage('A');
 }
 
 function createGroupPage(groupChar) {
-    roundNameDiv.innerHTML = "Grupa " + groupChar;
+    nameDiv.innerHTML = "Grupa " + groupChar;
     let group = groups[groupChar];
 
     let groupTeams = group.teams;
@@ -119,7 +122,7 @@ function createGroupPage(groupChar) {
         groupTableText += 
         `<tr class="${color}">
             <td class="flag-elem">
-                <img src='../flags/${groupTeams[i].link}'>
+                <img src='/create-mundial/flags/${groupTeams[i].link}'>
             </td>
             <td class="name-elem">${groupTeams[i].fullName}</td>
             <td class="points-elem">${groupTeams[i].stats.points}</td>
@@ -144,7 +147,7 @@ function createGroupPage(groupChar) {
         matchesTableText +=
         `<div class="group-match ${color}">
             <div class="matches-flag">
-                <img src="../flags/${teams[matches[i].team1].link}">
+                <img src="/create-mundial/flags/${teams[matches[i].team1].link}">
             </div>
             
             <div class="matches-center-div">
@@ -156,7 +159,7 @@ function createGroupPage(groupChar) {
             </div>
 
             <div class="matches-flag">
-                <img src="../flags/${teams[matches[i].team2].link}">
+                <img src="/create-mundial/flags/${teams[matches[i].team2].link}">
             </div>
         </div>`;
     }
@@ -169,7 +172,7 @@ function createGroupPage(groupChar) {
     matchesDiv.innerHTML = 
     `<div id="matches-table">
         ${matchesTableText}
-    </div>`
+    </div>`;
 
     var allMatchElems = document.getElementsByClassName("group-match");
     groupDivs = allMatchElems;

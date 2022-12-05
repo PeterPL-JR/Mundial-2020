@@ -126,22 +126,19 @@
 }
 
 /* Match Commit Button */
-.button {
-    position: static;
+#play-button, #start-button {
+    /* position: static; */
     width: 300px;
     height: 56px;
     
-    margin-left: auto;
-    margin-right: auto;
     font-size: 27px;
-}
 
-#play-button {
-    margin-top: 90px;
-    font-size: 32px;
-    
-    width: 330px;
-    height: 65px;
+    position: absolute;
+    bottom: 25px;
+
+    left: 0px;
+    right: 0px;
+    margin: auto;
 }
 
 .penalty-div {
