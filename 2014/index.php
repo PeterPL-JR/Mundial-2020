@@ -6,7 +6,7 @@
     <script src="../scripts/library.js"></script>
     <script src="../scripts/styles-handler.js"></script>
 
-    <link rel="icon" href="../images/logo2018.png" type="image/png">
+    <link rel="icon" href="../images/logo2014.png" type="image/png">
     <link rel="stylesheet" href="../styles/css-colors.css">
 
     <link rel="stylesheet" href="../styles/basic-styles.css">
@@ -21,7 +21,7 @@
 <!-- <img src="images/background.png" id="background"> -->
 <div id="container">
     <div id="header-div">
-        <img src="../images/logo2018.png" id="logo">
+        <img src="../images/logo2014.png" id="logo">
         <div id="logo-name">Mundial 2014</div>
         <div style="clear: both;"></div>
     </div>

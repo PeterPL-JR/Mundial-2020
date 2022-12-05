@@ -42,16 +42,16 @@
     --gray-color-dark-2018: #832728;
 	
 	/* Colors 2014 */
-    --basic-color-2014: #0c305d;
-    --shadow-color-1-2014: #071d37;
-    --shadow-color-2-2014: #0b2c54;
-    --logo-border-color-2014: #0f407b;
+    --basic-color-2014: #346C1F;
+    --shadow-color-1-2014: #29621C;
+    --shadow-color-2-2014: #1c4313;
+    --logo-border-color-2014: #48952c;
 
-    --button-color-1-2014: #832728;
-    --button-color-2-2014: #681f20;
-    --button-first-color-2014: #c05d4c;
-    --button-second-color-2014: #c05d4c;
+    --button-color-1-2014: #864f10;
+    --button-color-2-2014: #5b350a;
+    --button-first-color-2014: #cdae00;
+    --button-second-color-2014: #cdae00;
 
-    --gray-color-light-2014: #c05d4c;
-    --gray-color-dark-2014: #832728;
+    --gray-color-light-2014: #FED804;
+    --gray-color-dark-2014: #824c0f;
 }
