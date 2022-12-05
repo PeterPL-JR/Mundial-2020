@@ -21,7 +21,6 @@ function start() {
 
 // Functions of game initialization
 function initIndex(year) {
-    setScriptsInterval();
     initStyles(year);
     
     mode = MODE_PREDICT;
@@ -31,7 +30,6 @@ function initIndex(year) {
     });
 }
 function initCustom() {
-    setScriptsInterval();
     initCustomStyles();
     
     mode = MODE_CUSTOM;
@@ -42,13 +40,13 @@ function initCustom() {
 
 function init(text) {
     teams = JSON.parse(text);
-
+    
     createScript("prepare-groups.js", scripts, 0);
     createScript("group-round-handler.js", scripts, 1);
-
+    
     createScript("shared-obj-handler.js", scripts, 2);
     createScript("knock-round-handler.js", scripts, 3);
-
+    
     serverGet(DB_URL, {get_confeds: null}, function(text) {
         const confedsNames = JSON.parse(text);
         for(let i = 0; i < confedsNames.length; i++) {
@@ -58,6 +56,7 @@ function init(text) {
                 maxInGroup: null
             };         
         }
+        setScriptsInterval();
     });
 }
 
