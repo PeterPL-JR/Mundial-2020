@@ -12,9 +12,6 @@ div#winner-name {
     text-shadow: 2px 2px 5px #838383;
 }
 
-input[name="user-name"] {
-}
-
 textarea[name="description"] {
     resize: none;
 }

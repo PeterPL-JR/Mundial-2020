@@ -1,0 +1,54 @@
+:root {
+    --logo-height: 140px;
+    --name-div-gradient: linear-gradient(to right bottom, var(--gray-color-light), var(--gray-color-dark));
+}
+
+/* Logo Div */
+#logo {
+    padding-left: 80px;
+    width: 100%;
+
+    position: relative;
+    z-index: 1;
+}
+#logo-image {
+    border: solid var(--logo-border-color) 17px;
+    border-radius: 50%;
+    box-shadow: 10px 10px 30px #131123;
+    
+    width: 250px;
+    z-index: 1;
+    
+    position: relative;
+    left: 20px;
+    top: 20px;
+    float: left;
+}
+#logo-name {
+    position: relative;
+    float: left;
+    z-index: 0;
+
+    width: 980px;
+    height: var(--logo-height);
+
+    color: white;
+    font: bold 90px 'Caladea';
+    text-shadow: -5px -5px 3px var(--basic-color);
+    box-shadow: 10px 10px 30px var(--shadow-color-1);
+    border: solid 20px var(--basic-color);
+
+    text-align: center;
+    line-height: var(--logo-height);
+
+    margin: 0px;
+    margin-top: 62px;
+    margin-left: -80px;
+
+    background: linear-gradient(to right bottom, var(--gray-color-light), var(--gray-color-dark));
+    border-radius: 30px;
+}
+#logo-name b {
+    color: var(--logo-color-custom);
+    text-shadow: 6px 6px 2px var(--logo-shadow-color-custom);
+}

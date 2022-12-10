@@ -12,8 +12,8 @@ const CUSTOM = 0;
 
 function start() {
     contentDiv = getId("content");
-    roundNameDiv = document.querySelector(".round-name");
-    nameDiv = document.querySelector(".round-name .name-div");
+    phaseNameDiv = document.querySelector("#phase");
+    nameDiv = document.querySelector("#phase #phase-div");
 
     if(mode == MODE_PREDICT) prepareGroupRound();
     if(mode == MODE_CUSTOM) preparePots();

@@ -1,71 +1,29 @@
+/* Style for <body> */
 body {
     margin: 0px;
-    /* overflow: hidden; */
     background-color: #051024;
 }
 
+/* Font for App */
 @font-face {
     font-family: "Scores-Font";
     src: url("scores-font.otf");
 }
 
-:root {
-    --logo-height: 140px;
+/* Container */
+#container {
+    width: 1350px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-a:link, a:visited {
-    color: white;
-    text-decoration: none;
-}
-
-/* Background image of whole page */
+/* Background Image */
 img#background {
     position: absolute;
     width: 100%;
     z-index: -1;
 }
 
-/* Logo image */
-img#logo {
-    border: solid var(--logo-border-color) 20px;
-    width: 300px;
-
-    position: relative;
-    left: 40px;
-    top: 40px;
-    z-index: 3;
-    border-radius: 50%;
-    box-shadow: 10px 10px 30px #131123;
-}
-
-/* Page Title */
-#logo-name {
-    position: relative;
-    float: left;
-    z-index: 0;
-
-    width: 980px;
-    height: var(--logo-height);
-
-    color: white;
-    font: bold 90px 'Caladea';
-    text-shadow: -5px -5px 3px var(--basic-color);
-    box-shadow: 10px 10px 30px var(--shadow-color-1);
-    border: solid 20px var(--basic-color);
-
-    text-align: center;
-    line-height: var(--logo-height);
-
-    margin: 0px;
-    margin-top: 62px;
-    margin-left: -80px;
-
-    /* border: solid #7d1433 15px; */
-    background: linear-gradient(to right bottom, var(--gray-color-light), var(--gray-color-dark));
-    border-radius: 30px;
-}
-
-/* Main Button Styles */
+/* Button */
 .button {
     outline: none;
     border: none;
@@ -73,13 +31,13 @@ img#logo {
     color: white;
     font: normal 30px 'Verdana';
     border-radius: 10px;
+
     background: linear-gradient(
         var(--button-color-1), 
         var(--button-first-color), 
         var(--button-color-1)
     ); 
 }
-
 .button:hover {
     cursor: pointer;
     background: linear-gradient(
@@ -87,4 +45,10 @@ img#logo {
         var(--button-second-color), 
         var(--button-color-2)
     ); 
+}
+
+/* Link Styles */
+a:link, a:visited {
+    color: white;
+    text-decoration: none;
 }

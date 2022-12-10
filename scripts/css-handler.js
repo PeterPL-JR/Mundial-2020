@@ -10,7 +10,7 @@ function initStyles(key) {
 
     let variables = [];
     for(let key of variablesKeys) {
-        variables.push(key.substring(0, key.length - 5));
+        variables.push(key.substring(0, key.length - findModeName(key)));
     }
     variables = Array.from(new Set(variables));
     
@@ -57,4 +57,11 @@ function findRule(cssRules, key) {
         }
     }
     return -1;
+}
+
+function findModeName(key) {
+    const hyphenIndex = key.lastIndexOf("-");
+    const modeName = key.substring(hyphenIndex, key.length);
+
+    return modeName.length;
 }

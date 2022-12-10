@@ -1,5 +1,5 @@
 let contentDiv;
-let roundNameDiv;
+let phaseNameDiv;
 
 let nameDiv;
 let groupPlayButton;
@@ -85,7 +85,7 @@ function prepareGroupRound() {
     var groupDiv = document.createElement("div");
     var matchesDiv = document.createElement("div");
 
-    roundNameDiv.className = "round-name";
+    phaseNameDiv.className = null;
     groupDiv.id = "group-div";
     matchesDiv.id = "matches-div";
 

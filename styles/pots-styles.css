@@ -4,17 +4,8 @@
 
     --title-shadow-size-plus: 2px;
     --title-shadow-size-minus: 2px;
-    
-    --bold-color: #40a450;
-}
 
-#logo-name b {
-    color: var(--bold-color);
-    text-shadow: 6px 6px 2px var(--basic-color);
-}
-
-.pots-round-name {
-    margin-bottom: 75px !important;
+    --q-button-size: 60px;
 }
 
 .title-div {
@@ -56,6 +47,9 @@
 
 #pots-div {
     text-align: center;
+}
+.phase-pots {
+    margin-bottom: 75px !important;
 }
 
 .pot-table {
@@ -110,9 +104,7 @@
     text-align: center;
 }
 
-:root {
-    --q-button-size: 60px;
-}
+/* Switch Button */
 #qualification-button {
     width: var(--q-button-size);
     height: var(--q-button-size);

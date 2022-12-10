@@ -308,7 +308,7 @@ function endGame() {
     roundEnd = true;
     groupPlayButton.remove();
 
-    getClass("name-div")[0].innerHTML = "Zwycięzca";
+    getId("phase-div").innerHTML = "Zwycięzca";
     getId("content").style.height = "400px";
 
     var flagImage = document.createElement("img");
