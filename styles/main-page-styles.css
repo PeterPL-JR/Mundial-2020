@@ -4,6 +4,7 @@
 
     --title-shadow-size-plus: 2px;
     --title-shadow-size-minus: 2px;
+    
     --bold-color: #40a450;
 }
 
@@ -107,4 +108,30 @@
 .pot-table .flag-elem {
     padding-left: 5px;
     text-align: center;
+}
+
+:root {
+    --q-button-size: 60px;
+}
+#qualification-button {
+    width: var(--q-button-size);
+    height: var(--q-button-size);
+    float: left;
+    
+    outline: solid 7px gray;
+    position: absolute;
+    right: -50px;
+    margin-top: 24px;
+
+    box-shadow: 7px 7px 20px black;
+    border-radius: 50%;
+    
+}
+#qualification-button:hover {
+    width: 70px;
+    height: 70px;
+
+    cursor: pointer;
+    margin-top: 19px;
+    right: -55px;
 }

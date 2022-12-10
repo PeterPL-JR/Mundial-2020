@@ -16,9 +16,11 @@
     <link rel="stylesheet" href="../styles/group-table-styles.css">
     <link rel="stylesheet" href="../styles/matches-table-styles.css">
     <link rel="stylesheet" href="../styles/share-styles.css">
+    <link rel="stylesheet" href="../styles/user-styles.css">
 </head>
 <body>
 <!-- <img src="images/background.png" id="background"> -->
+<img src="../images/user.png" id='user-menu-img'>
 <div id="container">
     <div id="header-div">
         <img src="../images/logo2014.png" id="logo">

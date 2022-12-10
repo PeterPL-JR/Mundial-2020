@@ -1,0 +1,17 @@
+#user-menu-img {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 5;
+
+    width: 85px;
+    background-color: var(--user-color);
+    border-radius: 50%;
+    margin: 25px;
+    transition: 0.1s;
+}
+#user-menu-img:hover {
+    width: 100px;
+    cursor: pointer;
+    transition: 0.1s;
+}

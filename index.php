@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="styles/group-table-styles.css">
     <link rel="stylesheet" href="styles/matches-table-styles.css">
     <link rel="stylesheet" href="styles/share-styles.css">
+    <link rel="stylesheet" href="styles/user-styles.css">
 </head>
 <body>
 <!-- <img src="images/background.png" id="background"> -->
+<img src="images/user.png" id='user-menu-img'>
 <div id="container">
     <div id="header-div">
         <img src="images/cup.png" id="logo">
@@ -30,6 +32,7 @@
         <div class="pots-round-name round-name">
             <img src="images/ball.png">
             <div class="name-div">Koszyki</div>
+            <img src='images/ball2.png' id='qualification-button'>
             <div style="clear: both"></div>
         </div>
         <div id='pots-titles-div'></div>
@@ -42,6 +45,15 @@
 <script src="draw-handler.js"></script>
 <script>
     initCustom();
+
+    const qButton = document.getElementById("qualification-button");
+    qButton.onclick = function() {
+        openQualification();
+    }
+
+    function openQualification() {
+
+    }
 </script>
 </body>
 </html>
