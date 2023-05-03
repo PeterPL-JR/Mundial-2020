@@ -32,7 +32,6 @@
         <div id='phase' class='phase-pots'>
             <img id='phase-img' src="images/ball.png">
             <div id='phase-div'>Koszyki</div>
-            <img src='images/ball2.png' id='qualification-button'>
             <div style="clear: both"></div>
         </div>
         <div id='pots-titles-div'></div>
@@ -45,14 +44,6 @@
 <script src="draw-handler.js"></script>
 <script>
     initCustom();
-
-    const qButton = document.getElementById("qualification-button");
-    qButton.onclick = function() {
-        openQualification();
-    }
-
-    function openQualification() {
-    }
 </script>
 </body>
 </html>
