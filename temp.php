@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <title>Mundial <?php echo $year; ?> - Wytypuj Wyniki</title>
     <link rel="icon" href="../images/logo<?php echo $year; ?>.png" type="image/png">
-    <link rel="stylesheet" href="../styles/css-colors.css">
+    <link rel="stylesheet" href="../styles/themes/theme-<?php echo $year; ?>.css">
     
     <link rel="stylesheet" href="../styles/basic-styles.css">
     <link rel="stylesheet" href="../styles/logo-styles.css">
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="../styles/user-styles.css">
     
     <script src="../scripts/library.js"></script>
-    <script src="../scripts/css-handler.js"></script>
 </head>
 <body>
     <img src="../images/user.png" id='user-menu-img'>

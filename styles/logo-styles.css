@@ -49,6 +49,6 @@
     border-radius: 30px;
 }
 #logo-name b {
-    color: var(--logo-color-custom);
-    text-shadow: 6px 6px 2px var(--logo-shadow-color-custom);
+    color: var(--logo-color);
+    text-shadow: 6px 6px 2px var(--logo-shadow-color);
 }

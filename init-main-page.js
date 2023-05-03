@@ -21,8 +21,6 @@ function start() {
 
 // Functions of game initialization
 function initIndex(year) {
-    initStyles(year);
-    
     mode = MODE_PREDICT;
     YEAR = year;
     serverGet(DB_URL, {year}, function(text) {
@@ -30,8 +28,6 @@ function initIndex(year) {
     });
 }
 function initCustom() {
-    initCustomStyles();
-    
     mode = MODE_CUSTOM;
     serverGet(DB_URL, {}, function(text) {
         init(text);

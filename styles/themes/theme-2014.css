@@ -1,0 +1,15 @@
+:root {
+    --basic-color: #346C1F;
+    --shadow-color-1: #29621C;
+    --shadow-color-2: #1c4313;
+    --logo-border-color: #48952c;
+    --user-color: #346C1F;
+
+    --button-color-1: #864f10;
+    --button-color-2: #5b350a;
+    --button-first-color: #cdae00;
+    --button-second-color: #cdae00;
+
+    --gray-color-light: #FED804;
+    --gray-color-dark: #824c0f;
+}
