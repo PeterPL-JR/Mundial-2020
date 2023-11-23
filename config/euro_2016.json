@@ -1,0 +1,29 @@
+{
+    "knockout_matches": [
+        ["2A", "2C"],
+        ["1D", "3"],
+        ["1B", "3"],
+        ["1F", "2E"],
+        ["1C", "3"],
+        ["1E", "2D"],
+        ["1A", "3"],
+        ["2B", "2F"]
+    ],
+    "3p_options": [
+        "CDAB",
+        "CABE",
+        "CABF",
+        "DABE",
+        "DABF",
+        "EABF",
+        "CDAE",
+        "CDAF",
+        "CAFE",
+        "DAFE",
+        "CDBE",
+        "CDBF",
+        "ECBF",
+        "EDBF",
+        "CDFE"
+    ]
+}

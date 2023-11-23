@@ -122,7 +122,7 @@ function createGroupPage(groupChar) {
         groupTableText += 
         `<tr class="${color}">
             <td class="flag-elem">
-                <img src='/create-mundial/flags/${groupTeams[i].link}'>
+                <img src='${FLAGS_PATH}${groupTeams[i].link}'>
             </td>
             <td class="name-elem">${groupTeams[i].fullName}</td>
             <td class="points-elem">${groupTeams[i].stats.points}</td>
@@ -147,7 +147,7 @@ function createGroupPage(groupChar) {
         matchesTableText +=
         `<div class="group-match ${color}">
             <div class="matches-flag">
-                <img src="/create-mundial/flags/${teams[matches[i].team1].link}">
+                <img src="${FLAGS_PATH}${teams[matches[i].team1].link}">
             </div>
             
             <div class="matches-center-div">
@@ -159,7 +159,7 @@ function createGroupPage(groupChar) {
             </div>
 
             <div class="matches-flag">
-                <img src="/create-mundial/flags/${teams[matches[i].team2].link}">
+                <img src="${FLAGS_PATH}${teams[matches[i].team2].link}">
             </div>
         </div>`;
     }

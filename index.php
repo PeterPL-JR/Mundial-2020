@@ -1,3 +1,5 @@
+<?php include_once "constants.php"; ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -5,6 +7,8 @@
     <title>League Mundial</title>
     <link rel="icon" href="images/cup.png" type="image/png">
     <link rel="stylesheet" href="styles/themes/theme-mundial.css">
+    <script src="scripts/library.js"></script>
+    <script src="scripts/constants.js"></script>
 
     <link rel="stylesheet" href="styles/basic-styles.css">
     <link rel="stylesheet" href="styles/logo-styles.css">
@@ -17,8 +21,6 @@
 
     <link rel="stylesheet" href="styles/share-styles.css">
     <link rel="stylesheet" href="styles/user-styles.css">
-
-    <script src="scripts/library.js"></script>
 </head>
 <body>
 <img src="images/user.png" id='user-menu-img'>
@@ -43,7 +45,7 @@
 <script src="prepare-pots.js"></script>
 <script src="draw-handler.js"></script>
 <script>
-    initCustom();
+    initCustom(<?php echo TYPE_MUNDIAL; ?>);
 </script>
 </body>
 </html>

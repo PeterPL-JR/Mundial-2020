@@ -10,8 +10,10 @@ if(isset($_GET['get_confeds'])) {
     exit;
 }
 
-if(isset($_GET['year'])) {
+if(isset($_GET['year']) && isset($_GET['type'])) {
     $year = $_GET['year'];
+    $type = $_GET['type'];
+
     // Query for Predicting a real Mundial (some teams)
     $query_one_year = mysqli_query($base, <<<QUERY
         SELECT
@@ -31,9 +33,12 @@ if(isset($_GET['year'])) {
             groups_teams ON groups_teams.team_name = teams.name
         INNER JOIN
             confederations ON confederations.id = teams.con_id
+        INNER JOIN
+            leagues ON groups_teams.league_id = leagues.id
         WHERE
             lang.name = "polish" AND
-            year = $year;
+            year = $year AND
+            type_id = $type;
     QUERY);
     send_one_year();
 } else {

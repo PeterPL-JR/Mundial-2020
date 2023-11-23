@@ -1,8 +1,9 @@
-const DB_URL = "/create-mundial/get_db_data.php";
+const DB_URL = MAIN_DIR + "get_db_data.php";
 const scripts = [];
 let teams = {};
 let confeds = [];
 let YEAR = "NULL";
+let TYPE = "NULL";
 
 const MODE_PREDICT = 0;
 const MODE_CUSTOM = 1;
@@ -20,15 +21,17 @@ function start() {
 }
 
 // Functions of game initialization
-function initIndex(year) {
+function initIndex(year, type) {
     mode = MODE_PREDICT;
     YEAR = year;
-    serverGet(DB_URL, {year}, function(text) {
+    TYPE = type;
+    serverGet(DB_URL, {year, type}, function(text) {
         init(text);
     });
 }
-function initCustom() {
+function initCustom(type) {
     mode = MODE_CUSTOM;
+    TYPE = type;
     serverGet(DB_URL, {}, function(text) {
         init(text);
     });
@@ -72,7 +75,7 @@ function setScriptsInterval() {
 
 function createScript(src, variable, index) {
     var script = document.createElement("script");
-    script.src = "/create-mundial/" + src;
+    script.src = MAIN_DIR + src;
     script.onload = function() { variable[index] = true; };
     document.body.appendChild(script);
 }

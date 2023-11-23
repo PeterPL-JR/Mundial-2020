@@ -7,7 +7,9 @@ include 'library.php';
 $str_groups =  $_GET['groups'];
 $str_knock = $_GET['knock'];
 $logged = $_GET['logged'];
+
 $year = $_GET['year'];
+$type = $_GET['type'];
 
 $date = date("Y-m-d H:i:s");
 $date_name = date("ymd");
@@ -20,20 +22,17 @@ $user_id = NULL;
 $game_id = NULL;
 
 if($logged == "false") {
-
     $new_user_name = "player".$date_name;
     $new_login = $date_login."_".random_string(6);
 
     // Query (INSERT USER)
     mysqli_query($base, "INSERT INTO users(name, login) VALUES('$new_user_name', '$new_login');");
-    $get_user = mysqli_query($base, "SELECT id FROM users WHERE login = '$new_login';");
-    while($row = mysqli_fetch_assoc($get_user)) $user_id = $row['id'];
+    $user_id = mysqli_insert_id($base);
 }
 
 // Query (INSERT GAME)
-mysqli_query($base, "INSERT INTO shared_games(user_id, long_id, creation_date, year) VALUES($user_id, '$long_id', '$date', $year)");
-$get_game = mysqli_query($base, "SELECT id FROM shared_games WHERE user_id = $user_id AND creation_date = '$date';");
-while($row = mysqli_fetch_assoc($get_game)) $game_id = $row['id'];
+mysqli_query($base, "INSERT INTO shared_games(user_id, long_id, creation_date, year, type_id) VALUES($user_id, '$long_id', '$date', $year, $type)");
+$game_id = mysqli_insert_id($base);
 
 $obj_groups = json_decode($str_groups);
 $obj_knock = json_decode($str_knock);
