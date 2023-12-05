@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/themes/theme-mundial.css">
     <script src="scripts/library.js"></script>
     <script src="scripts/constants.js"></script>
+    <script src="scripts/football.js"></script>
 
     <link rel="stylesheet" href="styles/basic-styles.css">
     <link rel="stylesheet" href="styles/logo-styles.css">

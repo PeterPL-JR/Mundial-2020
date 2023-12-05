@@ -15,18 +15,18 @@ function initGroups(potsTeams) {
     }
     letters = Object.keys(groupsArray);
 
-    const newTeams = {};
+    const newTeams = [];
     for(let team of concatArray(potsTeams)) {
-        newTeams[team] = teams[team];
+        newTeams.push(team);
     }
     teams = newTeams;
 
     for(let confed of confeds) {
-        confed.teams = countKey(Object.values(teams), "confed", confed.name);
+        confed.teams = countKey(teams, "confed", confed.name);
         confed.maxInGroup = Math.ceil(confed.teams / _GROUPS);
         confed.maxWithout = _GROUPS - Math.ceil(confed.teams / confed.maxInGroup);
     }
-
+    
     confeds = confeds.filter(function(elem) {
         return elem.teams != 0;
     });
@@ -74,19 +74,19 @@ function openPot(potsArray, pot) {
     const unsignedTeams = [];
 
     for(let i = 0; i < _GROUPS; i++) {
-        const team = getRandomTeam(potsArray, pot);
+        const randTeam = getRandomTeam(potsArray, pot);
         
         for(let j = 0; j < _GROUPS; j++) {
             const group = groupsArray[letters[j]];
-            const confed = getConfed(teams[team]);
+            const confed = getConfed(randTeam);
 
             if(checkConfeds(group, confed) || countTeamsInGroup(group) >= pot + 1) {
                 if(j == _GROUPS - 1) {
-                    unsignedTeams.push({team, groupIndex: j, potIndex: pot});
+                    unsignedTeams.push({team: randTeam, groupIndex: j, potIndex: pot});
                 }
                 continue;
             }
-            group[pot] = team;
+            group[pot] = randTeam;
             break;
         }
     }
@@ -109,7 +109,7 @@ function replaceTeams({team, groupIndex, potIndex}) {
         thisGroup[potIndex] = anotherTeam;
         anotherGroup[potIndex] = thisTeam;
 
-        if(checkConfeds(thisGroup, getConfed(teams[anotherTeam])) && checkConfeds(anotherGroup, getConfed(teams[thisTeam]))) {
+        if(checkConfeds(thisGroup, getConfed(anotherTeam)) && checkConfeds(anotherGroup, getConfed(thisTeam))) {
             groupsArray[letters[groupIndex]][potIndex] = anotherTeam;
             groupsArray[letters[i]][potIndex] = thisTeam;
             return;
@@ -125,7 +125,7 @@ function countConfed(array, confed) {
     let counter = 0;
 
     for(let team of array) {
-        if(team != null && teams[team].confed == confed) {
+        if(team != null && team.confed == confed) {
             counter++;
         }
     }

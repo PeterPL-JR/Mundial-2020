@@ -9,6 +9,9 @@
         ["1A", "3"],
         ["2B", "2F"]
     ],
+    "premium_1p":
+        "ABCD",
+
     "3p_options": [
         "CDAB",
         "CABE",

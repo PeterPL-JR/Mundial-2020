@@ -30,19 +30,14 @@ function objectOfGroups() {
         var groupObj = groupsObjGlobal[keys[group]];
 
         groupArray[0] = [];
-        for(var team = 0; team < 4; team++) {
-            var stats = [];
+        for(var t = 0; t < 4; t++) {
+            let team = groupObj.teams[t];
+            var stats = [team.points(), team.goals(), team.goalsScored(), team.goalsLost(), team.wins(), team.draws(), team.losses()];
 
-            for(var key in groupObj.teams[team].stats) {
-                stats.push(groupObj.teams[team].stats[key]);
-            }
-
-            groupArray[0].push([
-                groupObj.teams[team].name, stats
-            ]);
+            groupArray[0].push([team.id, stats]);
         }
 
-        groupArray[1] = transformMatches(groupObj.matches);
+        groupArray[1] = transformMatches(concatArray(groupObj.matches));
         groupsFinal.push(groupArray);
     }
     return groupsFinal;
@@ -52,7 +47,7 @@ function objectOfKnock() {
     var knockFinal = [];
 
     for(var round = 0; round < knockObjGlobal.length; round++) {
-        knockFinal.push(transformMatches(knockObjGlobal[round]));
+        knockFinal.push(knockObjGlobal[round] ? transformMatches(knockObjGlobal[round]) : []);
     }
     return knockFinal;
 }
@@ -64,13 +59,13 @@ function transformMatches(matches) {
 
         var matchObj = matches[match];
         newMatches.push([
-            matchObj.team1, 
-            matchObj.team2,
+            matchObj.team1.id,
+            matchObj.team2.id,
 
-            matchObj.score1, 
+            matchObj.score1,
             matchObj.score2,
 
-            matchObj.penalty1, 
+            matchObj.penalty1,
             matchObj.penalty2,
         ]);
     }

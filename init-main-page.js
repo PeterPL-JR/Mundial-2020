@@ -1,6 +1,6 @@
 const DB_URL = MAIN_DIR + "get_db_data.php";
 const scripts = [];
-let teams = {};
+let teams = [];
 let confeds = [];
 let YEAR = "NULL";
 let TYPE = "NULL";
@@ -38,8 +38,32 @@ function initCustom(type) {
 }
 
 function init(text) {
-    teams = JSON.parse(text);
+    let obj = JSON.parse(text);
+    let teamsArray = [];
+
+    if(TYPE == TYPE_MUNDIAL) {
+        teamsArray = obj;
+    } else {
+        teamsArray = obj["teams"];
+        let knockData = JSON.parse(obj["knockout"]);
+
+        knockPairs = knockData["pairs"];
+        thirdPlacesOptions = knockData["thirdPlaces"];
+        
+        premiumFirstPlaces = knockData["firstPlaces"];
+    }
     
+    for(let id in teamsArray) {
+        let elem = teamsArray[id];
+
+        let team = new Team(id, elem.fullName, elem.link);
+        team.group_ch = elem.group_ch;
+        team.group_pos = elem.group_pos;
+        team.confed = elem.confed;
+
+        teams.push(team);
+    }
+
     createScript("prepare-groups.js", scripts, 0);
     createScript("group-round-handler.js", scripts, 1);
     
@@ -53,7 +77,7 @@ function init(text) {
                 name: confedsNames[i],
                 teams: null,
                 maxInGroup: null
-            };         
+            };
         }
         setScriptsInterval();
     });

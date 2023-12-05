@@ -28,32 +28,27 @@ let names = [
     "Finał"
 ];
 
-//DELETE
-function auto_mundial() {
-    prepareGroupRound();
-    for (var i = 0; i < 8; i++) {
-        for (var j = 0; j < 6; j++) {
-            playGroupMatch();
-        }
-        loadNextGroup();
-    }
-
-    var counter = 0;
-    while (counter < 16) {
-
-        if (playKnockMatch() == 2) {
-            playKnockMatch();
-        }
-        counter++;
-    }
-}
-//
-
 function prepareKnockRound() {
+    groupPlayButton.innerHTML = "Rozegraj Mecz";
+
+    if(TYPE == TYPE_MUNDIAL) {
+        createKnockMundial();
+    } else {
+        createKnockEuro();
+    }
+
+    groupPlayButton.onclick = function () {
+        playKnockMatch("match");
+    }
+
+    createKnockMatch(knockMatches[0], 0);
+    createKnockMatch(knockMatches[1], 1);
+    setKnockMatchActive(currentKnockMatchIndex, true);
+}
+
+function createKnockMundial() {
     getId("group-div").remove();
     getId("matches-div").remove();
-
-    groupPlayButton.innerHTML = "Rozegraj Mecz";
 
     knockMatches = [
         new Match(knockQualified['A'][0], knockQualified['B'][1]),
@@ -68,27 +63,98 @@ function prepareKnockRound() {
         new Match(knockQualified['F'][0], knockQualified['E'][1]),
         new Match(knockQualified['H'][0], knockQualified['G'][1])
     ];
+}
 
-    groupPlayButton.onclick = function () {
-        playKnockMatch("match");
+function createKnockEuro() {
+    getId("group-table").remove();
+    let extraGroups = [];
+
+    for(let i = 0; i < 4; i++) {
+        let team = extraTeams[i];
+        knockQualified[team.group_ch].push(team);
+        extraGroups.push(team.group_ch);
+    }
+    extraGroups.sort();
+
+    let option = thirdPlacesOptions.find(function(elem) {
+        let array = Array.from(elem).sort();
+        
+        for(let i = 0; i < extraGroups.length; i++) {
+            if(array[i] != extraGroups[i]) {
+                return false;
+            }
+        }
+        return true;
+    });
+
+    const PAIR_PLACE = 0;
+    const PAIR_GROUP = 1;
+
+    for(let i = 0; i < premiumFirstPlaces.length; i++) {
+        let p1 = premiumFirstPlaces[i];
+        let p3 = option[i];
+
+        let match = knockPairs.find((m) => m[0][0] == "1" && m[0][1] == p1);
+        match[1] += p3;
     }
 
-    createKnockMatch(knockMatches[0], 0);
-    createKnockMatch(knockMatches[1], 1);
-    setKnockMatchActive(currentKnockMatchIndex, true);
+    for(let i = 0; i < knockPairs.length; i++) {
+        let t1 = knockPairs[i][0];
+        let t2 = knockPairs[i][1];
+
+        let team1 = knockQualified[t1[PAIR_GROUP]][t1[PAIR_PLACE] - 1];
+        let team2 = knockQualified[t2[PAIR_GROUP]][t2[PAIR_PLACE] - 1];
+
+        knockMatches.push(new Match(team1, team2));
+    }
+}
+
+function prepareThirdPlaceTable() {
+    getId("group-div").remove();
+    getId("matches-div").remove();
+
+    groupPlayButton.innerHTML = "Zatwierdź";
+    nameDiv.innerHTML = "Drużyny z 3M";
+
+    let table = document.createElement("table");
+    table.id = "group-table";
+    table.className = "extra-teams-table";
+    
+    var groupTableText = "";
+    for(var i = 0; i < extraTeams.length; i++) {
+        var color = (i < 4) ? "dark" : "light";
+        if(i == 3) color += " qualify-border";
+
+        groupTableText += 
+        `<tr class="${color}">
+            <td class="flag-elem">
+                <img src='${FLAGS_PATH}${extraTeams[i].imgLink}'>
+            </td>
+            <td class="name-elem">${extraTeams[i].teamName}</td>
+            <td class="points-elem">${extraTeams[i].points()}</td>
+            <td class="goals-elem">
+                ${extraTeams[i].goalsScored()}-${extraTeams[i].goalsLost()}
+            </td>
+            <td class='group-elem'>${extraTeams[i].group_ch}</td>
+        </tr>`;
+    }
+    table.innerHTML = groupTableText;
+    getId("phase").after(table);
+
+    groupPlayButton.onclick = prepareKnockRound;
 }
 
 function createKnockMatch(knockMatchObj, pageIndex) {
     nameDiv.innerHTML = names[currentKnockRoundIndex];
 
-    var team1 = teams[knockMatchObj.team1];
-    var team2 = teams[knockMatchObj.team2];
+    var team1 = knockMatchObj.team1;
+    var team2 = knockMatchObj.team2;
 
-    var teamName1 = team1.fullName;
-    var teamName2 = team2.fullName;
+    var teamName1 = team1.teamName;
+    var teamName2 = team2.teamName;
 
-    var link1 = FLAGS_PATH + team1.link;
-    var link2 = FLAGS_PATH + team2.link;
+    var link1 = FLAGS_PATH + team1.imgLink;
+    var link2 = FLAGS_PATH + team2.imgLink;
 
     var knockMatch = document.createElement("div");
     knockMatch.className = "knock-match";
@@ -226,16 +292,23 @@ function playKnockMatch() {
         allKnockMatches[currentKnockRoundIndex] = knockMatches;
         knockMatches = [];
 
-        if (currentKnockRoundIndex == 2) {
-            knockMatches.push(new Match(teams[losers[0]], teams[losers[1]]));
-            losers = [];
-        } else if (currentKnockRoundIndex == 3) {
-            knockMatches.push(new Match(teams[finalists[0]], teams[finalists[1]]));
+        const SEMI_FINALS = 2;
+        const THIRD_PLACE_MATCH = 3;
+
+        if(currentKnockRoundIndex == SEMI_FINALS) {
+            if(TYPE == TYPE_MUNDIAL) {
+                knockMatches.push(new Match(losers[0], losers[1]));
+            } else {
+                knockMatches.push(new Match(finalists[0], finalists[1]));
+                currentKnockRoundIndex++;
+            }
+        } else if(currentKnockRoundIndex == THIRD_PLACE_MATCH) {
+            knockMatches.push(new Match(finalists[0], finalists[1]))
         } else {
             for (var i = 0; i < winners.length / 2; i++) {
 
-                var teamObj1 = teams[winners[i * 2]];
-                var teamObj2 = teams[winners[i * 2 + 1]];
+                var teamObj1 = winners[i * 2];
+                var teamObj2 = winners[i * 2 + 1];
                 knockMatches.push(new Match(teamObj1, teamObj2));
             }
 
@@ -245,7 +318,7 @@ function playKnockMatch() {
 
         currentKnockMatchIndex = 0;
         currentKnockRoundIndex++;
-
+        
         if (currentMatchesCount >= 2) {
             currentMatchesCount /= 2;
         }
@@ -255,13 +328,11 @@ function playKnockMatch() {
         var div1 = getId("knock-match-0");
         var div2 = getId("knock-match-1");
 
-        div1.remove();
-        if (currentKnockRoundIndex <= 3) {
-            div2.remove();
-        }
+        if(div1) div1.remove();
+        if(div2) div2.remove();
 
         if (currentKnockRoundIndex >= names.length) {
-            WINNER = bufferWinners[1];
+            WINNER = bufferWinners[bufferWinners.length - 1];
             endGame();
             return scoreTotal;
         }
@@ -312,12 +383,12 @@ function endGame() {
     getId("content").style.height = "400px";
 
     var flagImage = document.createElement("img");
-    flagImage.src = FLAGS_PATH + teams[WINNER].link;
+    flagImage.src = FLAGS_PATH + WINNER.imgLink;
     flagImage.id = "winner-flag";
 
     var nameDiv = document.createElement("div");
     nameDiv.id = "winner-name";
-    nameDiv.innerHTML = teams[WINNER].fullName;
+    nameDiv.innerHTML = WINNER.teamName;
 
     contentDiv.appendChild(flagImage);
     contentDiv.appendChild(nameDiv);

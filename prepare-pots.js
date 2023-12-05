@@ -58,23 +58,6 @@ function preparePots() {
     }
 }
 
-// TO DELETE
-function auto_pots() {
-    const array = [
-        ["qat", "bra", "bel", "fra", "arg", "eng", "spa", "por"],
-        ["mex", "nld", "den", "ger", "uru", "swi", "usa", "cro"],
-        ["sen", "irn", "jap", "mor", "srb", "pol", "kor", "tun"],
-        ["cam", "can", "ecu", "sau", "gha", "wal", "aus", "cri"]
-    ];
-    for (let i = 0; i < _POTS; i++) {
-        for (let j = 0; j < _POT_TEAMS; j++) {
-            potsTeams[i][j] = array[i][j];
-        }
-    }
-    startButton.click();
-}
-// TO DELETE
-
 function setInputEvents(pot, team) {
     const input = pots[pot][team].input;
     const image = pots[pot][team].image;
@@ -87,9 +70,10 @@ function setInputEvents(pot, team) {
 
                 potsTeams[pot][team] = text;
 
+                let t = teams[findTeamIndex(teams, text)];
                 input.className = "bold";
-                input.value = teams[text].fullName;
-                image.src = "flags/" + teams[text].link;
+                input.value = t.teamName;
+                image.src = "flags/" + t.imgLink;
                 return;
             }
             potsTeams[pot][team] = null;
@@ -111,14 +95,21 @@ function checkInputsTeams() {
 }
 
 function startGame() {
-    const groups = drawGroups(potsTeams);
-
+    let pots = [];
+    for(let i = 0; i < _POTS; i++) {
+        pots[i] = [];
+        for(let j = 0; j < _POT_TEAMS; j++) {
+            pots[i][j] = teams[findTeamIndex(teams, potsTeams[i][j])];
+        }
+    }
+    const groups = drawGroups(pots);
+    
     for (let groupChar in groups) {
         const group = groups[groupChar];
         for (let i = 0; i < _GROUP_TEAMS; i++) {
             const team = group[i];
-            teams[team].group_ch = groupChar;
-            teams[team].group_pos = (i + 1).toString();
+            team.group_ch = groupChar;
+            team.group_pos = (i + 1).toString();
         }
     }
 

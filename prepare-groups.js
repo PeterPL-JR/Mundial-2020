@@ -12,58 +12,24 @@ let groupDivs = [];
 var currentGroupIndex = 0;
 var currentMatchIndex = 0;
 
-class Match {
-    constructor(teamObj1, teamObj2) {
-        var teamName1 = teamObj1.name;
-        var teamName2 = teamObj2.name;
-
-        this.team1 = teamName1;
-        this.team2 = teamName2;
-    
-        this.score1 = -1;
-        this.score2 = -1;
-
-        this.penalty1 = -1;
-        this.penalty2 = -1;
-    }
-
-    playMatch(score1, score2) {
-        this.score1 = score1;
-        this.score2 = score2;
-    }
-
-    playPenalty(penalty1, penalty2) {
-        this.penalty1 = penalty1;
-        this.penalty2 = penalty2;
-    }
-}
+let extraTeams = [];
 
 function prepareGroupRound() {
-    for(var i = 0; i < 8; i++) {
-        var groupCh = String.fromCharCode(i + 65);
+    GROUPS = (TYPE == TYPE_MUNDIAL) ? 8 : 6;
+    LAST_GROUP = toChar(GROUPS - 1);
+
+    for(let i = 0; i < GROUPS; i++) {
+        let groupCh = String.fromCharCode(i + 65);
         groups[groupCh] = {
             teams: [],
             matches: []
         };
-
-        for(var key in teams) {
-            var obj = teams[key];
-            if(obj.group_ch == groupCh) {
-                obj.stats = {
-                    points: 0, goals: 0,
-                    
-                    goalsScored: 0, goalsLost: 0, 
-                    wins: 0, draws: 0, losses: 0
-                };
-                groups[groupCh].teams.push(obj);
-            }
-        }
     }
+    for(let team of teams) {
+        let groupCh = team.group_ch;
+        let groupPos = team.group_pos - 1;
 
-    for(var key in groups) {
-        groups[key].teams.sort(function(x, y) {
-            return x.group_pos - y.group_pos;
-        });
+        groups[groupCh].teams[groupPos] = team;
     }
 
     for(var key in groups) {
@@ -71,14 +37,18 @@ function prepareGroupRound() {
         var t = group.teams;
 
         group.matches = [
-            new Match(t[0], t[1]),
-            new Match(t[2], t[3]),
-
-            new Match(t[0], t[2]),
-            new Match(t[3], t[1]),
-
-            new Match(t[3], t[0]),
-            new Match(t[1], t[2]),
+            [
+                new Match(t[0], t[1]),
+                new Match(t[2], t[3])
+            ],
+            [
+                new Match(t[0], t[2]),
+                new Match(t[3], t[1])
+            ],
+            [
+                new Match(t[3], t[0]),
+                new Match(t[1], t[2])
+            ]
         ];
     }
 
@@ -110,7 +80,7 @@ function createGroupPage(groupChar) {
     let group = groups[groupChar];
 
     let groupTeams = group.teams;
-    let matches = group.matches;
+    let matches = concatArray(group.matches);
 
     var groupDiv = getId("group-div");
     var matchesDiv = getId("matches-div");
@@ -118,16 +88,19 @@ function createGroupPage(groupChar) {
     var groupTableText = "";
     for(var i = 0; i < 4; i++) {
         var color = (i < 2) ? "dark" : "light";
+        if(TYPE == TYPE_EURO && i == 2) color = "medium qualify-border";
+
+        if(i == 1) color += " qualify-border";
 
         groupTableText += 
         `<tr class="${color}">
             <td class="flag-elem">
-                <img src='${FLAGS_PATH}${groupTeams[i].link}'>
+                <img src='${FLAGS_PATH}${groupTeams[i].imgLink}'>
             </td>
-            <td class="name-elem">${groupTeams[i].fullName}</td>
-            <td class="points-elem">${groupTeams[i].stats.points}</td>
+            <td class="name-elem">${groupTeams[i].teamName}</td>
+            <td class="points-elem">${groupTeams[i].points()}</td>
             <td class="goals-elem">
-                ${groupTeams[i].stats.goalsScored}-${groupTeams[i].stats.goalsLost}
+                ${groupTeams[i].goalsScored()}-${groupTeams[i].goalsLost()}
             </td>
         </tr>`;
     }
@@ -147,7 +120,7 @@ function createGroupPage(groupChar) {
         matchesTableText +=
         `<div class="group-match ${color}">
             <div class="matches-flag">
-                <img src="${FLAGS_PATH}${teams[matches[i].team1].link}">
+                <img src="${FLAGS_PATH}${matches[i].team1.imgLink}">
             </div>
             
             <div class="matches-center-div">
@@ -159,7 +132,7 @@ function createGroupPage(groupChar) {
             </div>
 
             <div class="matches-flag">
-                <img src="${FLAGS_PATH}${teams[matches[i].team2].link}">
+                <img src="${FLAGS_PATH}${matches[i].team2.imgLink}">
             </div>
         </div>`;
     }

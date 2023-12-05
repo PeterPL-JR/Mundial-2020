@@ -5,7 +5,7 @@
 
 /* Table of Group Teams */
 #group-table {
-    box-shadow: 18px 18px 20px #808080, -13px -13px 20px #808080;
+    box-shadow: 15px 15px 20px #808080, -11px -11px 20px #808080;
     
     border-radius: 20px;
     border-collapse: collapse;
@@ -33,6 +33,9 @@
 }
 .light {
     background: linear-gradient(to right bottom, #e1e1e1, #b7b7b7);
+}
+.medium {
+    background: linear-gradient(to right bottom, #d1d1d1, #979797);
 }
 
 /* Flag Element */
@@ -68,4 +71,32 @@
     width: 90px;
     font: bold 20px 'Verdana';
     color: var(--font-color);
+}
+
+.qualify-border td {
+    border-bottom-width: 5px !important;
+    border-bottom-color: #7a7a7a !important;
+}
+
+.extra-teams-table {
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: -15px;
+}
+.extra-teams-table td {
+    height: 50px !important;
+}
+.extra-teams-table img {
+    height: 35px !important;
+}
+
+.extra-teams-table .name-elem {
+    width: 270px !important;
+}
+.extra-teams-table .group-elem {
+    width: 60px;
+    font: bold 28px 'Verdana';
+    color: var(--font-color);
+    border-left: solid var(--border-color) 4px;
 }

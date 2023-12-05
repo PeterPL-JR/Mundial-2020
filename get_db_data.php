@@ -1,5 +1,6 @@
 <?php
 include 'database.php';
+include 'constants.php';
 
 if(isset($_GET['input_text'])) {
     find_team($_GET['input_text']);
@@ -40,7 +41,7 @@ if(isset($_GET['year']) && isset($_GET['type'])) {
             year = $year AND
             type_id = $type;
     QUERY);
-    send_one_year();
+    send_one_year($year, $type);
 } else {
     // Query for Custom Mundial (all teams)
     $query_all = mysqli_query($base, <<<QUERY
@@ -63,8 +64,9 @@ if(isset($_GET['year']) && isset($_GET['type'])) {
     send_all();
 }
 
-function send_one_year() {
+function send_one_year($year, $type) {
     global $query_one_year;
+    $obj = [];
 
     $teams = array();
     while($row = mysqli_fetch_assoc($query_one_year)) {
@@ -83,12 +85,18 @@ function send_one_year() {
             'link' => $link,
     
             'group_ch' => $group_ch,
-            'group_pos' => $group_pos,
+            'group_pos' => intval($group_pos),
             'confed' => $confed
         ];
         $teams[$name] = $teams_object;
     }
-    echo json_encode($teams);
+    $obj = $teams;
+
+    if($type == TYPE_EURO) {
+        $knock_data = get_knockout_data($year);
+        $obj = ["teams" => $teams, "knockout" => $knock_data];
+    }
+    echo json_encode($obj);
 }
 
 function send_all() {
@@ -146,4 +154,11 @@ function get_confeds() {
         array_push($array, $row['name']);
     }
     echo json_encode($array);
+}
+
+function get_knockout_data($year) {
+    $file_data = json_decode(file_get_contents("config/euro_$year.json"), true);
+    $data = ["pairs" => $file_data["knockout_matches"], "thirdPlaces" => $file_data["3p_options"], "firstPlaces" => $file_data["premium_1p"]];
+    
+    return json_encode($data);
 }
