@@ -1,0 +1,52 @@
+.play-off-semi-final {
+    margin-bottom: 25px !important;
+}
+
+.play-off-final {
+    margin-top: 60px !important;
+}
+.play-off-final .team-name {
+    font-size: 25px !important;
+}
+
+.play-offs-title {
+    position: absolute;
+    z-index: 5;
+    left: 0px;
+    right: 0px;
+
+    width: 300px;
+    height: 70px;
+    padding-left: 30px;
+    margin-top: -60px;
+    margin-bottom: 0px;
+}
+.play-offs-title .phase-div {
+    font-size: 25px !important;
+    padding-left: 10px;
+
+    box-shadow: 
+    2px 2px 8px var(--shadow-color-2),
+    -2px -2px 8px var(--shadow-color-2),
+    -2px 2px 8px var(--shadow-color-2),
+    2px -2px 8px var(--shadow-color-2);
+}
+.play-offs-title img {
+    width: 52px;
+    margin-top: 12px;
+}
+
+.match-inactive img {
+    border-radius: 0px;
+}
+.match-inactive .team-name {
+    font-size: 35px !important;
+    color: #454545;
+}
+
+.semi-final-title {
+    margin-top: -52px;
+}
+.final-title {
+    margin-top: -17px;
+}

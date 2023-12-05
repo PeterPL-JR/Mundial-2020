@@ -24,6 +24,7 @@
 
     <link rel="stylesheet" href="../../styles/share-styles.css">
     <link rel="stylesheet" href="../../styles/user-styles.css">
+    <link rel="stylesheet" href="../../styles/play-offs-styles.css">
 </head>
 <body>
     <img src="../../images/user.png" id='user-menu-img'>
@@ -34,11 +35,12 @@
             <div style="clear: both;"></div>
         </div>
         <div id="content">
-            <div id='phase' class='phase-pots'>
-                <img id='phase-img' src="../../images/ball.png">
-                <div id='phase-div'></div>
+            <div id='phase' class='phase phase-pots'>
+                <img id='phase-img' class='phase-img' src="../../images/ball.png">
+                <div id='phase-div' class='phase-div'></div>
                 <div style="clear: both"></div>
             </div>
+            <button id="play-button" class='button'>Rozegraj mecz</button>
         </div>
     </div>
 <script src="../../init-main-page.js" id="init-script"></script>

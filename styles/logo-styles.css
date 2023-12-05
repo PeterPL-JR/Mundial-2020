@@ -34,7 +34,7 @@
 
     color: white;
     font: bold 90px 'Caladea';
-    text-shadow: -5px -5px 3px var(--basic-color);
+    text-shadow: -5px -5px 3px var(--font-shadow-color);
     box-shadow: 10px 10px 30px var(--shadow-color-1);
     border: solid 20px var(--basic-color);
 

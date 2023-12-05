@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 23. Nov 2023 um 18:28
+-- Erstellungszeit: 05. Dez 2023 um 21:04
 -- Server-Version: 10.4.27-MariaDB
 -- PHP-Version: 8.2.0
 
@@ -592,8 +592,8 @@ INSERT INTO `confederations` (`id`, `name`) VALUES
 
 CREATE TABLE `groups_teams` (
   `id` int(10) UNSIGNED NOT NULL,
-  `group_ch` varchar(1) NOT NULL,
-  `group_pos` int(10) UNSIGNED NOT NULL,
+  `group_ch` varchar(1) DEFAULT NULL,
+  `group_pos` int(10) UNSIGNED DEFAULT NULL,
   `league_id` varchar(4) NOT NULL,
   `team_name` varchar(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -746,7 +746,40 @@ INSERT INTO `groups_teams` (`id`, `group_ch`, `group_pos`, `league_id`, `team_na
 (141, 'F', 1, '5', 'hun'),
 (142, 'F', 2, '5', 'por'),
 (143, 'F', 3, '5', 'fra'),
-(144, 'F', 4, '5', 'ger');
+(144, 'F', 4, '5', 'ger'),
+(145, 'A', 1, '4', 'ger'),
+(146, 'A', 2, '4', 'sco'),
+(147, 'A', 3, '4', 'hun'),
+(148, 'A', 4, '4', 'swi'),
+(149, 'B', 1, '4', 'spa'),
+(150, 'B', 2, '4', 'cro'),
+(151, 'B', 3, '4', 'ita'),
+(152, 'B', 4, '4', 'alb'),
+(153, 'C', 1, '4', 'svn'),
+(154, 'C', 2, '4', 'den'),
+(155, 'C', 3, '4', 'srb'),
+(156, 'C', 4, '4', 'eng'),
+(157, 'D', 2, '4', 'nld'),
+(158, 'D', 3, '4', 'aut'),
+(159, 'D', 4, '4', 'fra'),
+(160, 'E', 1, '4', 'bel'),
+(161, 'E', 2, '4', 'svk'),
+(162, 'E', 3, '4', 'rom'),
+(163, 'F', 1, '4', 'tur'),
+(164, 'F', 3, '4', 'por'),
+(165, 'F', 4, '4', 'cze'),
+(166, NULL, 1, '4', 'pol'),
+(167, NULL, 1, '4', 'est'),
+(168, NULL, 1, '4', 'wal'),
+(169, NULL, 1, '4', 'fin'),
+(170, NULL, 4, '4', 'isr'),
+(171, NULL, 4, '4', 'ice'),
+(172, NULL, 4, '4', 'bih'),
+(173, NULL, 4, '4', 'ukr'),
+(174, NULL, 2, '4', 'geo'),
+(175, NULL, 2, '4', 'lux'),
+(176, NULL, 2, '4', 'gre'),
+(177, NULL, 2, '4', 'kaz');
 
 -- --------------------------------------------------------
 
@@ -942,7 +975,7 @@ INSERT INTO `names_teams` (`id`, `content`, `team_id`, `lang_id`) VALUES
 (52, 'Rumunia', 'rom', 1),
 (53, 'Turcja', 'tur', 1),
 (55, 'Czechy', 'cze', 1),
-(56, 'Slowacja', 'svk', 1),
+(56, 'Słowacja', 'svk', 1),
 (57, 'Irlandia', 'irl', 1),
 (58, 'Litwa', 'ltu', 1),
 (59, 'Węgry', 'hun', 1),
@@ -951,7 +984,7 @@ INSERT INTO `names_teams` (`id`, `content`, `team_id`, `lang_id`) VALUES
 (62, 'WKS', 'ivc', 1),
 (63, 'Angola', 'ang', 1),
 (64, 'RPA', 'rpa', 1),
-(65, 'Slowenia', 'svn', 1),
+(65, 'Słowenia', 'svn', 1),
 (66, 'Finlandia', 'fin', 1),
 (67, 'Grecja', 'gre', 1),
 (68, 'Chile', 'chi', 1),
@@ -1604,7 +1637,7 @@ ALTER TABLE `confederations`
 -- AUTO_INCREMENT für Tabelle `groups_teams`
 --
 ALTER TABLE `groups_teams`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT für Tabelle `lang`

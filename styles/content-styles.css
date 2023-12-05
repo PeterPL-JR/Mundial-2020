@@ -21,7 +21,7 @@
 }
 
 /* Phase Name */
-#phase {
+.phase {
     width: 600px;
     height: 70px;
     margin-bottom: 90px;
@@ -30,14 +30,14 @@
     margin-left: auto;
     margin-right: auto;
 }
-#phase-img {
+.phase-img {
     float: left;
     width: 120px;
 
     position: relative;
     z-index: 1;
 }
-#phase-div {
+.phase-div {
     box-shadow: 
     8px 8px 20px var(--shadow-color-2),
     -8px -8px 20px var(--shadow-color-2),

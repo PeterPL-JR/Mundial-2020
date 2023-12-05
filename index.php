@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" href="styles/share-styles.css">
     <link rel="stylesheet" href="styles/user-styles.css">
+    <link rel="stylesheet" href="styles/play-offs-styles.css">
 </head>
 <body>
 <img src="images/user.png" id='user-menu-img'>
@@ -32,9 +33,9 @@
         <div style="clear: both;"></div>
     </div>
     <div id="content">
-        <div id='phase' class='phase-pots'>
-            <img id='phase-img' src="images/ball.png">
-            <div id='phase-div'>Koszyki</div>
+        <div id='phase' class='phase phase-pots'>
+            <img id='phase-img' class='phase-img' src="images/ball.png">
+            <div id='phase-div' class='phase-div'>Koszyki</div>
             <div style="clear: both"></div>
         </div>
         <div id='pots-titles-div'></div>

@@ -55,7 +55,7 @@ function prepareGroupRound() {
     var groupDiv = document.createElement("div");
     var matchesDiv = document.createElement("div");
 
-    phaseNameDiv.className = null;
+    phaseNameDiv.className = "phase";
     groupDiv.id = "group-div";
     matchesDiv.id = "matches-div";
 
@@ -63,14 +63,7 @@ function prepareGroupRound() {
     contentDiv.appendChild(matchesDiv);
     createClearBoth(contentDiv);
 
-    var button = document.createElement("button");
-    button.id = "play-button";
-    button.className = "button";
-    button.innerHTML = "Rozegraj Mecz";
-    button.onclick = playGroupMatch;
-
-    groupPlayButton = button;
-    contentDiv.appendChild(button);
+    groupPlayButton.onclick = playGroupMatch;
 
     createGroupPage('A');
 }

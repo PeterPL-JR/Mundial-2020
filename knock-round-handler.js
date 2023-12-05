@@ -29,6 +29,7 @@ let names = [
 ];
 
 function prepareKnockRound() {
+    nameDiv.innerHTML = names[0];
     groupPlayButton.innerHTML = "Rozegraj Mecz";
 
     if(TYPE == TYPE_MUNDIAL) {
@@ -43,7 +44,7 @@ function prepareKnockRound() {
 
     createKnockMatch(knockMatches[0], 0);
     createKnockMatch(knockMatches[1], 1);
-    setKnockMatchActive(currentKnockMatchIndex, true);
+    setKnockMatchActive(0, true);
 }
 
 function createKnockMundial() {
@@ -145,20 +146,18 @@ function prepareThirdPlaceTable() {
 }
 
 function createKnockMatch(knockMatchObj, pageIndex) {
-    nameDiv.innerHTML = names[currentKnockRoundIndex];
+    
+    var t1 = knockMatchObj.team1;
+    var t2 = knockMatchObj.team2;
 
-    var team1 = knockMatchObj.team1;
-    var team2 = knockMatchObj.team2;
+    let knockMatch = knockMatchDiv(pageIndex, t1.teamName, t2.teamName, FLAGS_PATH + t1.imgLink, FLAGS_PATH + t2.imgLink);
+    contentDiv.insertBefore(knockMatch, groupPlayButton);
+}
 
-    var teamName1 = team1.teamName;
-    var teamName2 = team2.teamName;
-
-    var link1 = FLAGS_PATH + team1.imgLink;
-    var link2 = FLAGS_PATH + team2.imgLink;
-
+function knockMatchDiv(index, teamName1, teamName2, link1, link2) {
     var knockMatch = document.createElement("div");
     knockMatch.className = "knock-match";
-    knockMatch.id = "knock-match-" + pageIndex;
+    knockMatch.id = "knock-match-" + index;
     knockMatch.style.width = "945px";
 
     knockMatch.style.marginLeft = "auto";
@@ -194,13 +193,13 @@ function createKnockMatch(knockMatchObj, pageIndex) {
         </div>
         <div style="clear: both;">
     </div>`;
-    contentDiv.insertBefore(knockMatch, groupPlayButton);
+
+    return knockMatch;
 }
 
 function setKnockMatchActive(matchIndex, active) {
 
-    var pageMatchIndex = (matchIndex % 2);
-    var matchDiv = getId("knock-match-" + pageMatchIndex);
+    var matchDiv = getId("knock-match-" + matchIndex);
 
     knockInput1 = matchDiv.querySelectorAll("input")[0];
     knockInput2 = matchDiv.querySelectorAll("input")[1];
@@ -228,6 +227,11 @@ function setKnockMatchActive(matchIndex, active) {
     knockInput2.disabled = !active;
     knockInput1.disabled = !active;
     knockInput1.focus();
+
+    if(!active) {
+        knockInput1 = null;
+        knockInput2 = null;
+    }
 }
 
 function playKnockMatch() {
@@ -245,7 +249,7 @@ function playKnockMatch() {
         if (currentMode == "match") {
             knockMatches[currentKnockMatchIndex].playMatch(score1, score2);
             currentMode = "penalty";
-            createPenalty();
+            createPenalty(currentKnockMatchIndex % 2);
         }
         return scoreTotal;
     }
@@ -284,7 +288,7 @@ function playKnockMatch() {
         }
     }
 
-    setKnockMatchActive(currentKnockMatchIndex, false);
+    setKnockMatchActive(currentKnockMatchIndex % 2, false);
 
     currentKnockMatchIndex++;
     if (currentKnockMatchIndex >= currentMatchesCount) {
@@ -318,6 +322,7 @@ function playKnockMatch() {
 
         currentKnockMatchIndex = 0;
         currentKnockRoundIndex++;
+        nameDiv.innerHTML = names[currentKnockRoundIndex];
         
         if (currentMatchesCount >= 2) {
             currentMatchesCount /= 2;
@@ -339,7 +344,7 @@ function playKnockMatch() {
 
         if (currentMatchesCount == 1) {
             createKnockMatch(knockMatches[currentKnockMatchIndex], 0);
-            setKnockMatchActive(currentKnockMatchIndex, true);
+            setKnockMatchActive(currentKnockMatchIndex % 2, true);
             return scoreTotal;
         }
 
@@ -347,12 +352,12 @@ function playKnockMatch() {
         createKnockMatch(knockMatches[currentKnockMatchIndex + 1], 1);
 
     }
-    setKnockMatchActive(currentKnockMatchIndex, true);
+    setKnockMatchActive(currentKnockMatchIndex % 2, true);
     return scoreTotal;
 }
 
-function createPenalty() {
-    var matchDiv = document.querySelector("#knock-match-" + (currentKnockMatchIndex % 2) + " .center-div");
+function createPenalty(matchIndex) {
+    var matchDiv = document.querySelector("#knock-match-" + matchIndex + " .center-div");
     matchDiv.classList.add("penalty-div");
 
     var random1 = getRandom(0, 5);
