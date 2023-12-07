@@ -531,7 +531,7 @@ INSERT INTO `clubs` (`str_id`, `name`, `national_team_id`, `logo_src`, `level`) 
 ('wgw', 'Warta Gorzów Wielkopolski', 'pol', NULL, 1),
 ('whu', 'West Ham United', 'eng', NULL, 1),
 ('wia', 'KS Wiązownica', 'pol', NULL, 1),
-('wid', 'Widzew Lódź', 'pol', 'widzew_lodz.png', 4),
+('wid', 'Widzew Łódź', 'pol', 'widzew_lodz.png', 4),
 ('wie', 'Wieczysta Kraków', 'pol', NULL, 1),
 ('win', 'FC Winterthur', 'swi', NULL, 1),
 ('wja', 'Wiślanie Jaśkowice', 'pol', NULL, 1),

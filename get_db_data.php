@@ -18,7 +18,7 @@ if(isset($_GET['year']) && isset($_GET['type'])) {
     // Query for Predicting a real Mundial (some teams)
     $query_one_year = mysqli_query($base, <<<QUERY
         SELECT
-            names_teams.content as full_name,
+            cast(convert(names_teams.content using utf8) as binary) as full_name,
             teams.name as name,
             teams.link as link,
             groups_teams.group_ch as group_ch,
@@ -46,7 +46,7 @@ if(isset($_GET['year']) && isset($_GET['type'])) {
     // Query for Custom Mundial (all teams)
     $query_all = mysqli_query($base, <<<QUERY
         SELECT
-            names_teams.content as full_name,
+            cast(convert(names_teams.content using utf8) as binary) as full_name,
             teams.name as name,
             teams.link as link,
             confederations.name as confed
@@ -135,7 +135,7 @@ function find_team($text) {
             lang ON lang.id = names_teams.lang_id 
         WHERE 
             lang.name = 'polish' AND 
-            names_teams.content = '$text';
+            binary names_teams.content = binary '$text';
     QUERY);
 
     $result = mysqli_fetch_assoc($query_get_team);
