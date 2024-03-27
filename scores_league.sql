@@ -768,18 +768,9 @@ INSERT INTO `groups_teams` (`id`, `group_ch`, `group_pos`, `league_id`, `team_na
 (163, 'F', 1, '4', 'tur'),
 (164, 'F', 3, '4', 'por'),
 (165, 'F', 4, '4', 'cze'),
-(166, NULL, 1, '4', 'pol'),
-(167, NULL, 1, '4', 'est'),
-(168, NULL, 1, '4', 'wal'),
-(169, NULL, 1, '4', 'fin'),
-(170, NULL, 4, '4', 'isr'),
-(171, NULL, 4, '4', 'ice'),
-(172, NULL, 4, '4', 'bih'),
-(173, NULL, 4, '4', 'ukr'),
-(174, NULL, 2, '4', 'geo'),
-(175, NULL, 2, '4', 'lux'),
-(176, NULL, 2, '4', 'gre'),
-(177, NULL, 2, '4', 'kaz');
+(166, 'D', 1, '4', 'pol'),
+(167, 'E', 4, '4', 'ukr'),
+(168, 'F', 2, '4', 'geo');
 
 -- --------------------------------------------------------
 
@@ -1637,7 +1628,7 @@ ALTER TABLE `confederations`
 -- AUTO_INCREMENT für Tabelle `groups_teams`
 --
 ALTER TABLE `groups_teams`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT für Tabelle `lang`

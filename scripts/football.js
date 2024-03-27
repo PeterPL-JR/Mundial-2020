@@ -1,4 +1,4 @@
-const POINTS_FOR_WIN = 3;
+const POINTS_FOR_VICTORY = 3;
 const POINTS_FOR_DRAW = 1;
 
 class Match {
@@ -49,7 +49,7 @@ class Team {
         return this.wins() + this.draws() + this.losses();
     }
     points() {
-        return this.wins() * POINTS_FOR_WIN + this.draws() * POINTS_FOR_DRAW;
+        return this.wins() * POINTS_FOR_VICTORY + this.draws() * POINTS_FOR_DRAW;
     }
 
     goalsScored() {

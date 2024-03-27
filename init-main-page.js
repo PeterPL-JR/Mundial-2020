@@ -17,11 +17,6 @@ function start() {
     nameDiv = document.querySelector("#phase #phase-div");
     groupPlayButton = document.getElementById("play-button");
 
-    if(TYPE == TYPE_EURO && YEAR == 2024) {
-        preparePlayOffs();
-        return;
-    }
-
     if(mode == MODE_PREDICT) prepareGroupRound();
     if(mode == MODE_CUSTOM) preparePots();
 }

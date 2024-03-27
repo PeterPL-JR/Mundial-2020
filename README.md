@@ -1,7 +1,7 @@
 # Play-Euro
 
 ### Opis Aplikacji
-Aplikacja internetowa umożliwiająca typować wyniki Mistrzostw Europy 2024 w piłce nożnej, które odbędą się w przyszłym roku. 
+Aplikacja internetowa umożliwiająca typować wyniki Mistrzostw Europy 2024 w piłce nożnej, które odbędą się w tym roku. 
 Aplikacja pozwala na stworzyć cały własny przebieg turnieju, od fazy grupowej, aż do wyznaczenia zwycięzcy.
 
 ### Logowanie
